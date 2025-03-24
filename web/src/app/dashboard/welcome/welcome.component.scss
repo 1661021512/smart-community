@@ -1,0 +1,29 @@
+@import './../../../var';
+
+._body {
+  background-image: url("/assets/images/logo.jpg");
+  height: 100%;
+  min-height: 600px;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+}
+
+._image {
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
+._title {
+  letter-spacing: 0.1em;
+  color: #D01E21;
+}
+
+._time {
+  color: $background-color;
+}
+
+.card {
+  min-height: 320px;
+}
+
+

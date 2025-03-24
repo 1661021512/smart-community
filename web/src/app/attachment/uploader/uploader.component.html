@@ -1,0 +1,13 @@
+<img alt="上传图片" *ngIf="showPreview && imageUrl" [src]="imageUrl" (click)="showUploader = true" class="img-thumbnail"
+     style="max-height: 200px">
+<span *ngIf="formControl.value">{{formControl.value.name}}</span>
+<button type="button" class="btn btn-sm btn-outline-primary _upload" (click)="showUploader = true">
+  <i class="fa fa-upload"></i>上传
+</button>
+
+<yz-uploader *ngIf="showUploader"
+             (beClose)="onClose()"
+             (beUpload)="onUpload($event)"
+             [maxSize]="maxSize"
+             [accept]="accept">
+</yz-uploader>

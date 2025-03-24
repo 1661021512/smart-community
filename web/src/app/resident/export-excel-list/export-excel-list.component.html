@@ -1,0 +1,13 @@
+<span class="dropdown text-right">
+  <a class="btn btn-success dropdown-toggle" (click)="onClickOpen()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+    <i class="fas fa-history"></i>历史导出EXCEL列表
+  </a>
+
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <ng-container *ngFor="let historyExportExcel of historyExportExcels;">
+      <a class="dropdown-item" (click)="onDownload(historyExportExcel)"><i class="fas fa-file"></i>
+        {{historyExportExcel.createTime | date : 'yyyy-MM-dd HH:mm'}}</a>
+    </ng-container>
+  </div>
+</span>

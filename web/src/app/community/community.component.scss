@@ -1,0 +1,62 @@
+@import './variable';
+@import './../dashboard/dashboard.component';
+@import './../../var';
+
+.content {
+  background-color: #013243;
+  color: white;
+  height: 100%;
+  padding-bottom: 5em;
+}
+
+.chart {
+  height: 100%;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  background-color: $main-background-color;
+}
+
+.base-info .title {
+  float: left;
+  margin: 0 0.5em 0 0;
+}
+
+.box-info .icon {
+  float: left;
+  margin-right: .5em;
+  border: 1px solid $info-border-color;
+  background-color: $info-bg-color;
+  border-radius: 4px;
+  height: 3em;
+  width: 3em;
+  line-height: 3em;
+  text-align: center;
+}
+
+.box-info .icon svg {
+  margin-right: 0;
+}
+
+.box-info .text {
+  float: left;
+}
+
+.base-data .d-flex {
+  margin-right: 1em;
+}
+
+.box-info .count {
+  color: $info-text-color;
+  font-weight: bold;
+}
+
+.population-classification-height {
+  height: 340px;
+  text-align: center;
+  padding-left: 20px;
+}
+
+.community-info {
+  text-indent: 2em;
+}

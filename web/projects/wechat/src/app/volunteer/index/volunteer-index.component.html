@@ -1,0 +1,33 @@
+<ion-content
+  [scrollEvents]="true"
+  (ionScrollEnd)="onLogScrollEnd()"
+  #ionContent>
+  <ion-list>
+    <ion-list-header>
+      志愿者活动
+    </ion-list-header>
+    <ion-item>
+      <ion-col class="text-center border-right" routerLink="./content/{{volunteerAssociation}}">
+        <img alt="志愿者协会" width="30%" src="/assets/image/volunteer.png"/>
+        <p>志愿者协会</p>
+      </ion-col>
+      <ion-col class="text-center" routerLink="star">
+        <img alt="志愿明星" width="30%" src="/assets/image/start.png"/>
+        <p>服务明星</p>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngFor="let volunteerActivity of items" routerLink="./detail/{{volunteerActivity.id}}">
+      <ion-thumbnail slot="start">
+        <img alt="{{volunteerActivity.image?.name}}" [src]="volunteerActivity.image | imageUrl"/>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{volunteerActivity.name}}</h2>
+        <h3 class="text-secondary">截止日期：{{volunteerActivity.endDate | intDateToTimestamp | date: 'yyyy-MM-dd'}}</h3>
+        <p>
+          招募人数：{{volunteerActivity.numberOfPlanned}}, 已招募：{{volunteerActivity.numberOfAudited}}
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-progress-bar type="indeterminate" reversed="true" *ngIf="beLoading"></ion-progress-bar>
+  </ion-list>
+</ion-content>

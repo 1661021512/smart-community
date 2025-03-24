@@ -1,0 +1,54 @@
+@import './../variable';
+ul {
+  margin:0;
+  padding:0;
+}
+ul {
+  list-style:none;
+  width:330px;
+  margin:0 auto;
+}
+
+li {
+  float:left;
+  margin:0 1px -8px;
+  height:96px;
+}
+
+.hex {
+  overflow:hidden;
+  display:block;
+  width:100px;
+  height:116px;
+  transform: rotate(-60deg) skewY(30deg);
+}
+
+.hexIn {
+  background-color: $info-bg-color;
+  display:block;
+  width:100px;
+  height:116px;
+  text-align:center;
+  transform: skewY(-30deg) rotate(60deg);
+}
+
+li:nth-child(5n + 1) {
+  margin-left:51px;
+}
+
+// 垂直居中 https://www.huaweicloud.com/articles/a7271e815dd32d7618f6d2eb653f43de.html
+.v-auto {
+  position: relative;
+}
+
+.v-auto .text {
+  position: absolute;
+  top: 30%;
+  margin-left: -30px;
+  height: 116px;
+}
+
+.v-auto .text .count {
+  color: $info-text-color;
+  font-weight: bold;
+}

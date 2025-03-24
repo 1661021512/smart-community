@@ -1,0 +1,18 @@
+# 版本号
+version: '3'
+
+# 定义服务
+services:
+  smartCommunity.mysql57:
+    build:
+      context: ./
+    image: mysql:5.7
+    volumes:
+      - ./custom.cnf:/etc/mysql/conf.d/custom.cnf
+    ports:
+      - "3309:3306"
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=smartcommunity

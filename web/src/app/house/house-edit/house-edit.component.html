@@ -1,0 +1,55 @@
+<form (ngSubmit)="onSubmit(formGroup)" *ngIf="house" [formGroup]="formGroup">
+  <table class="table table-bordered table-striped">
+    <tbody>
+    <tr>
+      <td class="text-right">位置</td>
+      <td colspan="3">
+        {{house.unit.building.village.name}} - {{house.unit.building.name}} - {{house.unit.name}}
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">户间号<code>*</code></td>
+      <td><input [formControlName]="formKeys.name" appValidatorClass class="form-control" type="text"></td>
+      <td class="text-right">权重(决定房屋顺序)<code>*</code></td>
+      <td><input [formControlName]="formKeys.weight" appValidatorClass class="form-control" type="text"></td>
+    </tr>
+    <tr>
+      <td class="text-right">房屋性质<code>*</code></td>
+      <td>
+        <app-house-own-type-radio [formControlName]="formKeys.type"
+                                  [showSelectAll]="false"></app-house-own-type-radio>
+      </td>
+      <td class="text-right">房屋面积(m²)</td>
+      <td>
+        <input [formControlName]="formKeys.area" class="form-control" type="number">
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">享有保障性住房</td>
+      <td>
+        <app-true-or-false [formControlName]="formKeys.lowIncoming"></app-true-or-false>
+
+      </td>
+      <td class="text-right">享受减免房屋补贴</td>
+      <td>
+        <app-true-or-false [formControlName]="formKeys.relief"></app-true-or-false>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">入住时间</td>
+      <td>
+        <yz-date [formControlName]="formKeys.checkInTime"></yz-date>
+      </td>
+      <td class="text-right">备注</td>
+      <td>
+        <input [formControlName]="formKeys.remarks" class="form-control" type="text">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-12 text-center">
+      <button [disabled]="formGroup.invalid" class="btn btn-primary" type="submit"><i class="fa fa-save"></i>保存</button>
+    </div>
+  </div>
+</form>

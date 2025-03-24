@@ -1,0 +1,19 @@
+<div class="form-check form-check-inline">
+  <input [formControl]="formControl"
+         [value]="true"
+         class="form-check-input"
+         id="{{id}}_true"
+         name="{{id}}"
+         type="radio">
+  <label class="form-check-label badge badge-primary" for="{{id}}_true">{{labels.true}}</label>
+</div>
+<div class="form-check form-check-inline app-false">
+  <input
+    [formControl]="formControl"
+    [value]="false"
+    class="form-check-input"
+    id="{{id}}_false"
+    name="{{id}}"
+    type="radio">
+  <label class="form-check-label badge badge-info" for="{{id}}_false">{{labels.false}}</label>
+</div>

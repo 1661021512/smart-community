@@ -1,0 +1,89 @@
+<form (submit)="onQuery(queryFormGroup)" [formGroup]="queryFormGroup">
+  <div class="form-row">
+    <div class="form-group col-3">
+      <label>小区</label>
+      <app-region-select-of-current-user
+        endDistrictType="village"
+        [filter]="filterVillage"
+        [formControlName]="keys.villageId"></app-region-select-of-current-user>
+    </div>
+    <div class="form-group col-3">
+      <label>楼栋</label>
+      <app-building-select
+        [villageId]="queryFormGroup.get(keys.villageId).value"
+        [formControlName]="keys.buildingId"></app-building-select>
+    </div>
+    <div class="form-group col-3">
+      <label>显示范围</label>
+      <div class="form-control border-0">
+        <label><input type="radio" [formControlName]="keys.isExcludedGriderIsNotNull" [value]="true"> 未指定网格员</label>
+        &nbsp; &nbsp;
+        <label><input type="radio" [formControlName]="keys.isExcludedGriderIsNotNull" [value]="false"> 全部</label>
+      </div>
+    </div>
+    <div class="form-group col-3 text-left align-self-end search">
+      <button type="submit" class="btn btn-info">
+        <i class="fas fa-search"></i>查询
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-12 text-right">
+    <app-back-button></app-back-button>
+  </div>
+</div>
+
+<yz-size [size]="pageData.size"
+         (changeSize)="onChangeSize($event)"></yz-size>
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>房屋</th>
+    <th>户主</th>
+    <th>户主电话</th>
+    <th>居住人员</th>
+    <th>网格员</th>
+    <th>使用性质</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let house of pageData.content; index as index">
+    <td>{{pageData.number * pageData.size + index + 1}}</td>
+    <td [innerHTML]="house | housePlace | async"></td>
+    <td>{{house.owner?.name}}</td>
+    <td>
+      {{house.owner?.phone}}
+    </td>
+    <td>
+      <span *ngFor="let resident of house.residents">{{resident.name}}&nbsp;</span>&nbsp;
+    </td>
+    <td>{{house.grider?.webUser.name}}</td>
+    <td [innerHTML]="house.type | owned"></td>
+    <td>
+      <button type="button" class="btn btn-sm btn-outline-primary" *ngIf="house.grider?.id !== griderId"
+              (click)="onAddHouseToGrider(house, house.grider)">
+        <i class="fa fa-hammer"></i>设置
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-danger" *ngIf="house.grider?.id === griderId"
+              (click)="onCancelGrider(house)">
+        <i class="fa fa-minus-square"></i>取消
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<yz-page [page]="pageData.number"
+         [size]="pageData.size"
+         [totalElements]="pageData.totalElements"
+         (changePage)="onChangePage($event)"></yz-page>
+
+
+
+
+
+
+

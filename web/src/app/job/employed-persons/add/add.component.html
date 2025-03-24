@@ -1,0 +1,48 @@
+<form class="container-sm">
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">姓名:</label>
+    <div class="col-sm-7">
+      <input appValidatorClass class="form-control" type="text" >
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">性别:</label>
+    <div class="col-sm-7">
+      <select class="form-control">
+        <option [value]="1">男</option>
+        <option [value]="0">女</option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">出生日期:</label>
+    <div class="col-sm-7">
+      <!--<yz-date></yz-date>-->
+      <input appValidatorClass class="form-control" type="text" >
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">年龄:</label>
+    <div class="col-sm-7">
+      <input appValidatorClass class="form-control" type="number">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">电话:</label>
+    <div class="col-sm-7">
+      <input appValidatorClass class="form-control" type="number" >
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">家庭住址:</label>
+    <div class="col-sm-7">
+      <input appValidatorClass class="form-control" type="text" >
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-7 offset-2">
+      <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>提交
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,6 @@
+<ion-select okText="确定" cancelText="取消" [formControl]="formControl">
+  <ion-select-option *ngFor="let educationType of educationTypes"
+                     [value]="educationType.id">{{educationType.value}}
+  </ion-select-option>
+</ion-select>
+

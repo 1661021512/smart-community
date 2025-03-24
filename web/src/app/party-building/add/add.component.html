@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup" class="container-sm">
+  <div class="mb-3 row">
+    <div class="col-sm-9 text-center">
+      <h2 class="text-center">{{district.name}}党组织</h2>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right">职务:</label>
+    <div class="col-sm-7">
+      {{post.name}}
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right">姓名<code>*</code></label>
+    <div class="col-sm-7">
+      <input [formControlName]="formKeys.name" appValidatorClass placeholder="请填写名字" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-5 offset-2">
+      <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid"><i class="fas fa-save"></i>保存
+      </button>
+    </div>
+  </div>
+</form>

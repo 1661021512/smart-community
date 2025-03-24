@@ -1,0 +1,9 @@
+<ion-app *ngIf="init">
+  <ion-router-outlet></ion-router-outlet>
+  <!-- fab placed to the top and end and on the top edge of the content overlapping header -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button routerLink="/">
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-app>

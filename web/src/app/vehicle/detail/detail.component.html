@@ -1,0 +1,63 @@
+<div class="row mb-2">
+  <div class="col-12 text-right">
+    <app-back-button></app-back-button>
+  </div>
+</div>
+<table *ngIf="vehicle" class="table table-bordered table-striped">
+  <tbody>
+  <tr>
+    <td>车牌号</td>
+    <td>{{vehicle.plateNumber}}</td>
+    <td>车辆品牌</td>
+    <td>{{vehicle.brand.name}}</td>
+  </tr>
+  <tr>
+    <td>车牌型号</td>
+    <td>523</td>
+    <td>车身颜色</td>
+    <td>{{vehicle.colour | vehicleColor}}</td>
+  </tr>
+  <tr>
+    <td>车牌类型</td>
+    <td>{{vehicle.type.name}}</td>
+    <td>登记时间</td>
+    <td>{{vehicle.createTime | date: 'yyyy-MM-dd'}}</td>
+  </tr>
+  <tr>
+    <td>停车位</td>
+    <td>{{vehicle.parkingSpaceNumber}}</td>
+    <td>停车位使用类型</td>
+    <td [innerHTML]="vehicle?.parkingSpaceType | parkingSpaceType"></td>
+  </tr>
+  </tbody>
+  <tr>
+    <td colspan="4">
+      <button (click)="showMore = !showMore" class="btn btn-block btn-outline-warning" type="button">显示车主信息</button>
+    </td>
+  </tr>
+</table>
+<table *ngIf="showMore" class="table table-bordered table-striped">
+  <tbody>
+  <tr>
+    <td class="col-2">姓名</td>
+    <td>{{vehicle.owner.name}}</td>
+    <td class="col-2">性别</td>
+    <td [innerHTML]="vehicle.owner.idNumber | idSex | sex"></td>
+  </tr>
+  <tr>
+    <td class="col-2">年龄</td>
+    <td>{{vehicle.owner.idNumber | idAge}}</td>
+    <td class="col-2">电话</td>
+    <td>
+      <app-phone-show [resident]="vehicle.owner"></app-phone-show>
+    </td>
+  </tr>
+  <tr>
+    <td class="col-2">现住址:
+    </td>
+    <td colspan="3"><span *ngFor="let house of vehicle.owner.houses; last as last">{{house | housePlace | async}}
+      <br *ngIf="!last"/></span></td>
+  </tr>
+  </tbody>
+</table>
+

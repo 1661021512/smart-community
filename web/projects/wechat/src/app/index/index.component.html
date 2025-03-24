@@ -1,0 +1,38 @@
+<!--在这启用事件，当滚动结束时获取通知, 同时加入#ionContent以便在C层中获取到该组件对应的Angularp实例-->
+<ion-content
+  [scrollEvents]="true"
+  (ionScrollEnd)="logScrollEnd()"
+  #ionContent>
+  <ion-img src="/assets/image/header.png"></ion-img>
+  <div class="border-bottom border-top border-success border-1">
+    <ion-row>
+      <ion-col class="text-center">
+        <a routerLink="/notice">
+          <img alt="通知公告" src="/assets/image/notice.png" class="img-thumbnail"/>
+        </a>
+        <p>通知公告</p>
+      </ion-col>
+      <ion-col class="text-center">
+        <a routerLink="/job">
+          <img alt="就业服务" src="/assets/image/job.png" class="img-thumbnail"/>
+        </a>
+        <p>就业服务</p>
+      </ion-col>
+      <ion-col class="text-center">
+        <a routerLink="/volunteer">
+          <img alt="志愿者" src="/assets/image/volunteer.png" class="img-thumbnail"/>
+        </a>
+        <p>志愿者</p>
+      </ion-col>
+      <ion-col class="text-center">
+        <a routerLink="/star">
+          <img alt="服务明星" src="/assets/image/start.png" class="img-thumbnail"/>
+        </a>
+        <p>服务明星</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <wechat-notice-index [loadNextPage$]="loadNextPage$"></wechat-notice-index>
+</ion-content>
+
+

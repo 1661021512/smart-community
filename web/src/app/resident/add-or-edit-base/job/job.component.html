@@ -1,0 +1,37 @@
+<form [formGroup]="formGroup">
+  <table class="table table-bordered">
+    <tr>
+      <td>就业情况</td>
+      <td>
+        <select [formControlName]="formKeys.employmentStatus" class="form-control">
+          <option [ngValue]="0">失业</option>
+          <option [ngValue]="1">就业</option>
+          <option [ngValue]="2">退休</option>
+        </select>
+      </td>
+      <td>求职意向</td>
+      <td>
+        <app-job-type-multi-input [formControlName]="formKeys.jobTypeRequirements"></app-job-type-multi-input>
+      </td>
+    </tr>
+    <tr>
+      <td>务工地点</td>
+      <td>
+        <input [formControlName]="formKeys.workPlace" class="form-control" type="text">
+      </td>
+      <td>工作单位:</td>
+      <td>
+        <app-enterprise-auto-complete [formControlName]="formKeys.enterprise"></app-enterprise-auto-complete>
+      </td>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+      <td>特长</td>
+      <td>
+        <app-skill-multi-input [formControlName]="formKeys.skills"></app-skill-multi-input>
+      </td>
+    </tr>
+  </table>
+</form>
+

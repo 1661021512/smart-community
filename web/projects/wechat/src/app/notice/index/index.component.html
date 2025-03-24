@@ -1,0 +1,6 @@
+<ion-content
+  [scrollEvents]="true"
+  (ionScrollEnd)="logScrollEnd()"
+  #ionContent>
+  <wechat-notice-index [loadNextPage$]="loadNextPage$"></wechat-notice-index>
+</ion-content>

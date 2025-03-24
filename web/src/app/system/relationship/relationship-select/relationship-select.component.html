@@ -1,0 +1,5 @@
+<select class="form-control" [formControl]="selected">
+  <option *ngFor="let object of objects;" [ngValue]="object.id">
+    {{object.name}}
+  </option>
+</select>

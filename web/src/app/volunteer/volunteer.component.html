@@ -1,0 +1,130 @@
+<form [formGroup]="queryForm" (submit)="onSubmit(queryForm)">
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <div class="row">
+        <label>年龄</label></div>
+      <div class="row">
+        <div class="proportion">
+          <input [formControlName]="keys.ageBegin" class="form-control" type="number">
+        </div>
+        <div class="line text-center"><label>至</label></div>
+        <div class="proportion">
+          <input [formControlName]="keys.ageEnd" class="form-control" type="number">
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-2  spacing-left">
+      <label>姓名</label>
+      <input class="form-control" placeholder="姓名..." type="text" [formControlName]="keys.name">
+    </div>
+    <div class="form-group col-md-1 ">
+      <label>性别</label>
+      <select class="form-control" [formControlName]="keys.sex">
+        <option [value]="null">全部</option>
+        <option [value]="male">男</option>
+        <option [value]="female">女</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-2 spacing spacing-left">
+      <label>电话</label>
+      <input class="form-control" placeholder="电话号..." type="text" [formControlName]="keys.phone">
+    </div>
+    <div class="form-group col-md-1 ">
+      <label>学历</label>
+      <app-education-select [formControlName]="keys.education"></app-education-select>
+    </div>
+    <div class="form-group col-md-1 ">
+      <label>服务明星</label>
+      <select class="form-control" [formControlName]="keys.beStar">
+        <option [value]="null">全部</option>
+        <option [value]="1">是</option>
+        <option [value]="0">否</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2 text-left align-self-end search">
+      <button class="btn btn-warning" type="reset">
+        <i class="fas fa-trash-alt"></i>重置
+      </button>
+      <button class="btn btn-info" type="submit">
+        <i class="fas fa-search"></i>查询
+      </button>
+    </div>
+  </div>
+</form>
+<hr>
+<yz-size (changeSize)="onSizeChange($event)" [size]="pageData.size"></yz-size>
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>出生日期</th>
+    <th>文化程度</th>
+    <th>电话</th>
+    <th>参与活动</th>
+    <th>排名</th>
+    <th>联系地址</th>
+    <th>加入日期</th>
+    <th>操作</th>
+  </tr>
+  <tr *ngFor="let volunteer of pageData.content; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{volunteer.wechatUser.name}}<i *ngIf="volunteer.beStar" class="fa fa-star text-danger"></i></td>
+    <td [innerHTML]="volunteer.wechatUser.sex | sex"></td>
+    <td>{{volunteer.wechatUser.birthday | intDateToTimestamp | date: 'yyyy-MM-dd'}}</td>
+    <td [innerHTML]="volunteer.wechatUser.education | education"></td>
+    <td>
+      {{volunteer.phone}}
+    </td>
+    <td>
+      <table>
+        <tr *ngFor="let signUp of volunteer.volunteerActivitySignUps; last as last">
+          {{signUp.volunteerActivity.name}}<ng-container *ngIf="!last">&nbsp;</ng-container>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <span *ngIf="volunteer.beStar">{{volunteer.weight}}</span>
+      <span *ngIf="!volunteer.beStar">--</span>
+    </td>
+    <td>{{volunteer.wechatUser.address}}</td>
+    <td>{{volunteer.createTime | date: 'yyyy-MM-dd'}}</td>
+    <td> <span class="btn btn-outline-success btn-sm" (click)="onSetStar(volunteer)" *ngIf="!volunteer.beStar">
+        <i class="fas fa-cog"></i>设置明星
+      </span>
+      <span class="btn btn-outline-primary btn-sm" (click)="onUpdateWeight(volunteer)" *ngIf="volunteer.beStar">
+        <i class="fas fa-cog"></i>设置排名
+      </span>
+      <span class="btn btn-outline-danger btn-sm" (click)="onCancelStar(volunteer)" *ngIf="volunteer.beStar">
+        <i class="fas fa-trash-alt"></i>取消明星
+      </span></td>
+  </tr>
+  </thead>
+</table>
+<yz-page (changePage)="onPageChange($event)" *ngIf="pageData.content"
+         [page]="pageData.number"
+         [size]="pageData.size"
+         [totalElements]="pageData.totalElements"></yz-page>
+
+<!--设置明星-->
+<yz-modal *ngIf="showSetStarModal">
+  <div class="container-md p-3">
+    <app-edit-or-set-weight [volunteer]="modalVolunteer"
+                            (beSubmit)="onSetStarSubmit($event)"
+                            (beClose)="showSetStarModal = false"></app-edit-or-set-weight>
+  </div>
+</yz-modal>
+
+<!--设置排名-->
+<yz-modal *ngIf="showUpdateWeightModal">
+  <div class="container-md p-3">
+    <app-edit-or-set-weight [volunteer]="modalVolunteer"
+                            (beSubmit)="onUpdateWeightSubmit($event)"
+                            (beClose)="showUpdateWeightModal = false"></app-edit-or-set-weight>
+  </div>
+</yz-modal>
+

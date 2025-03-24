@@ -1,0 +1,3 @@
+<app-village-select *ngIf="showVillageSelect" [formControl]="villageControl"></app-village-select>
+<app-building-select *ngIf="showBuildingSelect" [formControl]="buildingFormControl" [villageId]="villageControl.value"></app-building-select>
+<app-house-select [buildingId]="buildingFormControl.value" [formControl]="formControl"></app-house-select>

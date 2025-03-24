@@ -1,0 +1,82 @@
+<form (submit)="onSubmit(queryForm)" [formGroup]="queryForm" class="form-group">
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label>车主</label>
+      <input type="input" class="form-control" [formControlName]="keys.owner">
+    </div>
+    <div class="form-group col-md-2">
+      <label>车牌号</label>
+      <input type="input" class="form-control" [formControlName]="keys.plateNumber">
+    </div>
+    <div class="form-group col-md-2">
+      <label>小区</label>
+      <app-village-select [formControlName]="keys.village"></app-village-select>
+    </div>
+    <div class="form-group col-md-2">
+      <label>车辆类型</label>
+      <app-vehicle-type-select [formControlName]="keys.type"></app-vehicle-type-select>
+    </div>
+    <div class="form-group col-md-2 text-left align-self-end search">
+      <button type="submit" class="btn btn-info">
+        <i class="fas fa-search"></i> 查询
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="row mb-2">
+  <div class="col-12 text-right">
+    <a class="btn btn-primary" routerLink="add"><i class="fas fa-plus"></i>新增</a>
+  </div>
+</div>
+<yz-size (changeSize)="onSizeChange($event)" [size]="pageData.size"></yz-size>
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>车主</th>
+    <th>车牌号</th>
+    <th>车辆品牌</th>
+    <th>车辆类型</th>
+    <th>联系方式</th>
+    <th>停车位</th>
+    <th>车身颜色</th>
+    <th>小区</th>
+    <th>停车位使用性质</th>
+    <th>登记时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let vehicle of pageData.content ; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{vehicle.owner.name}}</td>
+    <td>{{vehicle.plateNumber}}</td>
+    <td>{{vehicle.brand.name}}</td>
+    <td>{{vehicle.type.name}}</td>
+    <td>{{vehicle.owner.phone}}</td>
+    <td>{{vehicle.parkingSpaceNumber}}</td>
+    <td>{{vehicle.colour | vehicleColor}}</td>
+    <td>{{vehicle.owner.houses | village | async}}</td>
+    <td [innerHTML]="vehicle.parkingSpaceType | parkingSpaceType"></td>
+    <td>{{vehicle.createTime | date: 'yyyy-MM-dd'}}</td>
+
+    <td>
+      <span class="btn btn-outline-success btn-sm" routerLink="view/{{vehicle.id}}">
+        <i class="fas fa-eye"></i>详情
+      </span>
+      <span class="btn btn-outline-primary btn-sm" routerLink="edit/{{vehicle.id}}">
+        <i class="fas fa-pen"></i>编辑
+      </span>
+      <span class="btn btn-outline-danger btn-sm" (click)="onDelete(vehicle)">
+        <i class="fas fa-trash-alt"></i>
+        删除
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<yz-page (changePage)="onPageChange($event)" *ngIf="pageData.content"
+         [page]="pageData.number"
+         [size]="pageData.size"
+         [totalElements]="pageData.totalElements"></yz-page>

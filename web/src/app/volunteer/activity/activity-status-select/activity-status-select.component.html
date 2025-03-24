@@ -1,0 +1,6 @@
+<select class="form-control" [formControl]="activityStatusSelected">
+  <option *ngIf="state.showPleaseSelect" [ngValue]="null">全部</option>
+  <option *ngFor="let activityStatus of activityStatuses" [ngValue]="activityStatus.id">
+    {{activityStatus.name}}
+  </option>
+</select>

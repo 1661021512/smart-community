@@ -1,0 +1,88 @@
+<div class="_body">
+  <div class="row img-fluid">
+    <div class="col-3">
+      <div class="card">
+        <h5 class="card-header text-success">居民数量
+        </h5>
+        <div class="card-body text-center">
+          <div class="line-height-150 font-size-100">
+            <i class="fa fa-user text-primary"></i>
+          </div>
+          <div class="_text text-success line-height-150 font-size-100">
+            {{residentCount}}
+          </div>
+        </div>
+      </div>
+      <div class="card mt-2">
+        <h5 class="card-header text-success">党员占比
+        </h5>
+        <div class="card-body text-center">
+          <app-party-ratio *ngIf="districtDataStatistics.district"
+                           height="200px"
+                           [districtId]="districtDataStatistics.district.id"></app-party-ratio>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <app-region-select-of-current-user
+        [formControl]="districtIdFormControl"></app-region-select-of-current-user>
+      <app-map
+        *ngIf="districtIdFormControl.value"
+        [districtId]="districtIdFormControl.value"
+        (beDistrictIdChange)="onDistrictIdChange($event)"
+        height="600px"></app-map>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <h5 class="card-header text-success">住房数量
+        </h5>
+        <div class="card-body text-center">
+          <div class="line-height-150 font-size-100">
+            <i class="fa fa-home text-primary"></i>
+          </div>
+          <div class="_text text-success line-height-150 font-size-100">
+            {{houseCount}}
+          </div>
+        </div>
+      </div>
+      <div class="card mt-2">
+        <h5 class="card-header text-success">接种完成率
+        </h5>
+        <div class="card-body">
+          <app-covid *ngIf="districtDataStatistics.district"
+                     [districtId]="districtIdFormControl.value"
+                     height="200px"></app-covid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-8">
+      <div class="card">
+        <h5 class="card-header text-success">辖区内居民数据
+        </h5>
+        <div class="card-body">
+          <app-house-and-resident
+            *ngIf="districtDataStatistics.district"
+            (beDistrictChange)="onDistrictChange($event)"
+            [districtId]="districtIdFormControl.value"
+            [height]="'300px'"></app-house-and-resident>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <h5 class="card-header text-success">录入工作量
+        </h5>
+        <div class="card-body">
+          <app-data-enter height="300px"
+                          *ngIf="districtDataStatistics.district"
+                          [districtId]="districtIdFormControl.value"></app-data-enter>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mask">
+
+</div>

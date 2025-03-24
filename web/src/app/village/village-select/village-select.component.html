@@ -1,0 +1,18 @@
+<ng-select [clearable]="clearable"
+           [formControl]="villageSelected"
+           [groupBy]="groupBy"
+           [groupValue]="groupValue"
+           [items]="villages"
+           [searchFn]="onSearch"
+           bindLabel="name"
+           bindValue="id"
+           notFoundText="未找到相关记录"
+           typeToSearchText="请选择">
+  <ng-template let-item="item" ng-optgroup-tmp>
+    {{item?.name}} - <small>{{item?.town.name}}</small>
+  </ng-template>
+  <ng-template let-item="item" ng-option-tmp>
+    {{item.name}}
+  </ng-template>
+</ng-select>
+

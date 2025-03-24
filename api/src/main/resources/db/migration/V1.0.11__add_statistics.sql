@@ -1,0 +1,2 @@
+create table statistics (id bigint not null auto_increment, create_time datetime(6), total_count integer, user_id bigint not null, primary key (id)) engine=InnoDB;
+alter table statistics add constraint FK6f62k0fk8of8dux130d6ibc54 foreign key (user_id) references user (id);

@@ -1,0 +1,80 @@
+<div class="container-fluid" *ngIf="resident">
+  <div class="row">
+    <div class="col-2">
+      <div class="card">
+        <img alt="Card image cap" class="card-img-top img-thumbnail" src="/assets/gentelella/user.jpg">
+        <div class="card-body">
+          <h5 class="card-title">{{resident.name}}</h5>
+          <p class="card-text"><span [innerHTML]="resident.idNumber | idSex | sex"></span>
+            &nbsp;年龄：{{resident.idNumber | idAge}}
+          </p>
+          <p>
+            出生日期：{{resident.idNumber | idBirthday | date: 'yyyy-MM-dd'}}
+          </p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li (click)="onToggle(0)" [ngClass]="{'active': isActive(0)}" class="list-group-item">基本情况</li>
+          <li (click)="onToggle(1)" [ngClass]="{'active': isActive(1)}" class="list-group-item">人文关怀</li>
+          <li (click)="onToggle(2)" [ngClass]="{'active': isActive(2)}" class="list-group-item">就业情况</li>
+          <li (click)="onToggle(3)" [ngClass]="{'active': isActive(3)}" class="list-group-item">在校生</li>
+          <li (click)="onToggle(4)" [ngClass]="{'active': isActive(4)}" class="list-group-item">军人</li>
+          <li (click)="onToggle(5)" [ngClass]="{'active': isActive(5)}" class="list-group-item">社会综治</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <span (click)="onToggle(0)" [ngClass]="{'active': isActive(0)}" class="nav-link">基本情况</span>
+            </li>
+            <li class="nav-item">
+              <span (click)="onToggle(1)" [ngClass]="{'active': isActive(1)}" class="nav-link">人文关怀</span>
+            </li>
+            <li class="nav-item">
+              <span (click)="onToggle(2)" [ngClass]="{'active': isActive(2)}" class="nav-link">就业情况</span>
+            </li>
+            <li class="nav-item">
+              <span (click)="onToggle(3)" [ngClass]="{'active': isActive(3)}" class="nav-link">在校生</span>
+            </li>
+            <li class="nav-item">
+              <span (click)="onToggle(4)" [ngClass]="{'active': isActive(4)}" class="nav-link">军人</span>
+            </li>
+            <li class="nav-item">
+              <span (click)="onToggle(5)" [ngClass]="{'active': isActive(5)}" class="nav-link">社会综治</span>
+            </li>
+            <li class="nav-item">
+              <button type="button" (click)="onSave()"  [disabled]="formGroup.invalid" class="btn btn-info text-right ml-2">
+                <i class="fas fa-save"></i>保存
+              </button>
+              <button type="button" (click)="onSubmit()" [disabled]="formGroup.invalid" class="btn btn-primary text-right">
+                <i class="fas fa-save"></i>保存并关闭
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body text-left">
+          <app-basic *ngIf="activeIndex === 0"
+                     [formGroup]="formGroup"
+                     [resident]="resident"></app-basic>
+          <app-aged *ngIf="activeIndex === 1"
+                    [formGroup]="formGroup"
+                    [resident]="resident"></app-aged>
+          <app-job *ngIf="activeIndex === 2"
+                   [formGroup]="formGroup"
+                   [resident]="resident"></app-job>
+          <app-student *ngIf="activeIndex === 3"
+                       [formGroup]="formGroup"
+                       [resident]="resident"></app-student>
+          <app-soldier *ngIf="activeIndex === 4"
+                       [formGroup]="formGroup"
+                       [resident]="resident"></app-soldier>
+          <app-security *ngIf="activeIndex === 5"
+                        [formGroup]="formGroup"
+                        [resident]="resident"></app-security>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

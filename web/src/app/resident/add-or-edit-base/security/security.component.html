@@ -1,0 +1,53 @@
+<form [formGroup]="formGroup">
+  <table class="table table-bordered">
+    <tr>
+      <td>信访人员</td>
+      <td [colSpan]="formGroup.get(formKeys.beLetterImitationPeople).value ? 1 : 3">
+        <app-true-or-false
+          [formControlName]="formKeys.beLetterImitationPeople"></app-true-or-false>
+      </td>
+      <td *ngIf="formGroup.get(formKeys.beLetterImitationPeople).value">
+        信仿内容
+      </td>
+      <td *ngIf="formGroup.get(formKeys.beLetterImitationPeople).value">
+        <input [formControlName]="formKeys.letterImitationContent" class="form-control" type="text" value="选择是时，输入信仿内容">
+      </td>
+    </tr>
+    <tr>
+      <td>参加邪教组织</td>
+      <td [colSpan]="formGroup.get(formKeys.beCultMember).value ? 1 : 3">
+        <app-true-or-false
+          [formControlName]="formKeys.beCultMember"></app-true-or-false>
+      </td>
+      <td *ngIf="formGroup.get(formKeys.beCultMember).value">组织名称</td>
+      <td *ngIf="formGroup.get(formKeys.beCultMember).value">
+        <app-cult-auto-complete [formControlName]="formKeys.cult"></app-cult-auto-complete>
+      </td>
+    <tr>
+      <td>矫正人员</td>
+      <td [colSpan]="formGroup.get(formKeys.beCrimed).value ? 1 : 3">
+        <app-true-or-false
+          [formControlName]="formKeys.beCrimed"></app-true-or-false>
+      </td>
+      <td *ngIf="formGroup.get(formKeys.beCrimed).value">矫正类型</td>
+      <td *ngIf="formGroup.get(formKeys.beCrimed).value">
+        <label><input #crimedType0 (change)="onCrimedTypeChange(1, crimedType0.checked)"
+                      [defaultChecked]="getCrimedTypeChecked(1)" class="form-check-inline"
+                      type="checkbox">劳教</label>
+        <label><input #crimedType1 (change)="onCrimedTypeChange(2, crimedType1.checked)"
+                      [defaultChecked]="getCrimedTypeChecked(2)" class="form-check-inline"
+                      type="checkbox">服刑</label>
+        <label><input #crimedType2 (change)="onCrimedTypeChange(3, crimedType2.checked)"
+                      [defaultChecked]="getCrimedTypeChecked(3)" class="form-check-inline"
+                      type="checkbox">吸毒</label>
+      </td>
+    </tr>
+    <tr>
+      <td>宗教信仰</td>
+      <td colspan="3">
+        <app-religious-belief-auto-complete
+          [formControlName]="formKeys.religiousBelief"></app-religious-belief-auto-complete>
+      </td>
+    </tr>
+  </table>
+</form>

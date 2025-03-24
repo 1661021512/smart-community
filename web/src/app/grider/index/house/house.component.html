@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-12 text-center text-success">
+    <h4>网格员：{{grider?.webUser.name}}，网格员：{{grider?.webUser.username}}，管理住房：{{grider?.houseCount}}间，
+      管理居民：{{grider?.residentCount}}人</h4>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-6 text-left">
+    <button type="button" class="btn btn-danger"
+            (click)="onBatchDelete(pageData.content)"
+            [disabled]="batchDeleteDisabled">
+      <i class="fa fa-minus"></i>批量移除
+    </button>
+  </div>
+  <div class="col-6 text-right">
+    <a class="btn btn-primary" routerLink="./add/{{grider?.id}}"><i class="fas fa-plus"></i>新增住房</a>
+  </div>
+</div>
+<yz-size [size]="pageData.size" (changeSize)="onSizeChange($event)"></yz-size>
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>
+      <app-check-all *ngIf="pageData.content"
+                     (beChange)="onCheckAllChange()"
+                     [singleCheckboxChange$]="singleCheckboxChange$"
+                     [checkboxes]="pageData.content"></app-check-all>
+      <label>全选</label>
+    </th>
+    <th>序号</th>
+    <th>房屋</th>
+    <th>户主</th>
+    <th>户主电话</th>
+    <th>居住人员</th>
+    <th>使用性质</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <tr *ngFor="let house of pageData.content; index as i">
+    <td class="text-center">
+      <app-check-single [checked]="house._checked" (beChange)="onSingleChange($event,house)"></app-check-single>
+    </td>
+    <td>{{ pageData.size * pageData.number + i + 1 }}</td>
+    <td>{{ house | housePlace | async}}</td>
+    <td>{{ house.owner?.name }}</td>
+    <td>
+      <app-phone-show [resident]="house.owner"></app-phone-show>
+    </td>
+    <td>
+      <table>
+        <tr class="bg-transparent" *ngFor="let resident of house.residents">{{resident.name}}</tr>
+      </table>
+    </td>
+    <td [innerHTML]="house.type | owned"></td>
+    <td>
+      <span (click)="onRemove(house, i)" class="btn btn-outline-danger btn-sm">
+            <i class="fas fa-minus"></i>移除
+          </span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<yz-page [page]="pageData.number"
+         [size]="pageData.size"
+         [totalElements]="pageData.totalElements"
+         (changePage)="onPageChange($event)"></yz-page>
+

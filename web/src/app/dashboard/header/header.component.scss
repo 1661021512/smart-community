@@ -1,0 +1,43 @@
+.header {
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.header .left {
+  line-height: 4em;
+}
+.header .title {
+  width: 50%;
+  font-size: 3rem;
+}
+
+.header-title {
+  text-align: center;
+  color: #ffffff;
+  font-size: 2rem;
+  text-shadow: 0 0 3rem #00d8ff;
+  padding-bottom: 5rem;
+}
+
+.header-img {
+  background: url('/assets/dashboard/head.gif') no-repeat center center;
+  background-size: 100%;
+  height: 90%;
+  width: 90%;
+  position: absolute;
+  top: 1.4rem;
+  left: 3.4rem;
+}
+
+.header-bottom {
+  width: calc(100% - .4rem);
+  height: .16rem;
+  background: url('/assets/dashboard/header.png') no-repeat;
+  background-size: calc(100% - .2rem) 100%;
+  padding: 0 .2rem;
+  margin-left: .3rem;
+}
+
+.middle {
+  position: relative;
+}

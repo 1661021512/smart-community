@@ -1,0 +1,24 @@
+<div class="form-text">
+  <div *ngIf="showSelectAll" class="form-check form-check-inline">
+    <input class="form-check-input ml-1" id="{{id}}_all"
+           [formControl]="ownedRadioControl"
+           [value]="null"
+           name="inlineRadioOptions" type="radio" >
+    <label class="form-check-label" for="{{id}}_all">
+      <span class='badge badge-pill badge-primary'>全部</span>
+    </label>
+  </div>
+  <div *ngFor="let ownedRadio of ownedRadios; index as i" class="form-check form-check-inline">
+      <input  [formControl]="ownedRadioControl" [value]="ownedRadio.id"
+             class="form-check-input ml-1"
+             id="{{id}}_{{ownedRadio.id}}"
+             name="inlineRadioOptions"
+             type="radio" >
+      <label class="form-check-label" for="{{id}}_{{ownedRadio.id}}">
+        <span [innerHTML]="ownedRadio.id | owned"></span>
+      </label>
+    </div>
+</div>
+
+
+

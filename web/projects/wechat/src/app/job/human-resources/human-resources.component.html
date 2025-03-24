@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-title>人力资源公司</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list lines="full">
+    <ion-row>
+      <ion-col class="border-right">
+        <ion-item size="large" routerLink="./content/{{laborDispatch}}">劳务派遣</ion-item>
+        <ion-item size="large" routerLink="./content/{{headhuntingService}}">猎头服务</ion-item>
+        <ion-item size="large" routerLink="./content/{{governmentAndEnterprise}}">政企对接</ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item size="large" routerLink="./content/{{skillTraining}}">技能培训</ion-item>
+        <ion-item size="large" routerLink="./content/{{jobAgent}}">代理招聘</ion-item>
+        <ion-item size="large" routerLink="./content/{{enterprise}}">企业对接</ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+  <wechat-content-detail [keyword]="keyword"></wechat-content-detail>
+</ion-content>

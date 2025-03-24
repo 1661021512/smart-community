@@ -1,0 +1,65 @@
+<form  class="container-sm" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup)">
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">标题<code>*</code></label>
+    <div class="col-sm-10">
+      <input  [formControlName]="formKeys.title" type="text" class="form-control" name="title" id="title">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">副标题<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.subTitle" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">摘要<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.summary" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">发布者<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.name" type="text" class="form-control" name="name" id="name" readonly>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">发布时间<code>*</code></label>
+    <div class="col-sm-10">
+      <input  type="text" class="form-control" name="createTime" id="createTime"
+              value="{{formGroup.get(this.formKeys.createTime).value | date: 'yyyy-MM-dd HH:mm'}}"
+              readonly>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">封面<code>*</code></label>
+    <div class="col-sm-10">
+      <img *ngIf="imageModel" alt="{{imageModel.alt}}" [src]="imageModel.src" (click)="showUploader = true" class="img-thumbnail"
+           style="max-height: 200px">
+      <yz-uploader *ngIf="showUploader"
+                   [maxSize]="2 * 1024 * 1024"
+                   accept="image/png, image/jpeg"
+                   (beClose)="onUploadClose()"
+                   (beUpload)="onUploaded($event)"></yz-uploader>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">权序（越小越靠前）<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.weight" type="number" class="form-control">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">公告详细<code>*</code></label>
+    <div class="col-sm-10">
+      <app-editor [formControlName]="formKeys.content" [height]="300"></app-editor>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-10 offset-2">
+      <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid"><i class="fas fa-save"></i>保存
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,23 @@
+.house-edit {
+  width: 94px;
+  height: 67px;
+  position: relative;
+
+  h6 {
+    background-color: whitesmoke;
+    padding: 0 0.5em;
+    bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+    opacity: 0.8;
+
+    i {
+      margin-left: 0.5em;
+    }
+  }
+}
+
+span > i.fa {
+  margin-left: 0.5em;
+}

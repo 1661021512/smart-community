@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-7 offset-3">
+    <h3 *ngIf="isView">{{titleFormControl.value}}</h3>
+    <input class="w-50 form-control" *ngIf="!isView" [formControl]="titleFormControl">
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-8">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn" [ngClass]="getClass('view')" (click)="isView = true">
+        <input type="radio"><i class="fa fa-eye"></i> 阅览
+      </label>
+      <label class="btn" [ngClass]="getClass('edit')" (click)="isView = false">
+        <input type="radio"><i class="fa fa-pencil-alt"></i> 编辑
+      </label>
+    </div>
+  </div>
+  <div class="col-4 text-right" *ngIf="changed">
+    <button class="btn btn-primary" type="button" (click)="onSubmit()"><i class="fa fa-save"></i>保存</button>
+  </div>
+</div>
+<div class="row" *ngIf="isView">
+  <div class="col-10 offset-2">
+    <app-mobile-review>
+      <div [innerHTML]="contentFormControl.value | safe"></div>
+    </app-mobile-review>
+  </div>
+</div>
+<div class="row" *ngIf="!isView">
+  <div class="col-12">
+    <app-editor [formControl]="contentFormControl"></app-editor>
+  </div>
+</div>
+
+

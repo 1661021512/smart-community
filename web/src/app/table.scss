@@ -1,0 +1,23 @@
+tr {
+  td {
+    vertical-align: middle;
+  }
+  td:nth-child(1) {
+    width: 10%;
+    text-align: right;
+  }
+  td:nth-child(2) {
+    width: 30%;
+  }
+
+  td:nth-child(3) {
+    width: 10%;
+    text-align: right;
+  }
+
+  td:nth-child(4) {
+    width: 30%;
+  }
+}
+
+

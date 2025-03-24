@@ -1,0 +1,90 @@
+<form class="container-sm" *ngIf="propertyCompany" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup)">
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="name">名称<code>*</code></label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.name"  class="form-control" name="name" id="name">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="legalPerson">法人<code>*</code></label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.legalPerson" class="form-control" name="legalPerson" id="legalPerson">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="contacts">联系人<code>*</code></label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.contacts" class="form-control" name="contacts" id="contacts">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="phone">联系电话<code>*</code></label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.phone" class="form-control" name="phone" id="phone">
+      <small class="text-danger" *ngIf="formGroup.get(this.formKeys.phone)!.touched && formGroup.get(this.formKeys.phone)!.invalid">
+        <span *ngIf="formGroup.get(this.formKeys.phone).errors?.isChinaMobileNumber">
+          电话号码验证失败，请重新输入！
+        </span>
+      </small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="alternateContact">备用联系人</label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.alternateContact" class="form-control" name="alternateContact" id="alternateContact">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="alternatePhone">备用联系电话</label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.alternatePhone" class="form-control" name="alternatePhone" id="alternatePhone">
+      <small class="text-danger" *ngIf="formGroup.get(this.formKeys.alternatePhone)!.touched && formGroup!.invalid">
+        <span *ngIf ="formGroup.errors?.iSAlternatePhone">
+          电话号码验证失败，请重新输入！
+        </span>
+      </small>
+    </div>
+  </div>
+  <app-multi-village-select [setVillages]="propertyCompany.villages"></app-multi-village-select>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">注册时间<code>*</code></label>
+    <div class="col-sm-10">
+      <yz-date [formControlName]="formKeys.createTime"></yz-date>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="timelyResponseRate">及时响应率<code>*</code></label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.timelyResponseRate" class="form-control" name="timelyResponseRate"
+             id="timelyResponseRate">
+      <small class="text-danger" *ngIf="formGroup.get(this.formKeys.timelyResponseRate)!.touched && formGroup!.invalid">
+        <span *ngIf="formGroup.get(this.formKeys.timelyResponseRate).errors?.isInteger">
+          及时响应率只能为整数，请重新输入！
+        </span>
+      </small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="score">综合评分<code>*</code></label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.score" class="form-control" name="score" id="score">
+      <small class="text-danger" *ngIf="formGroup.get(this.formKeys.score)!.touched && formGroup!.invalid">
+        <span *ngIf="formGroup.get(this.formKeys.score).errors?.isInteger">
+          综合评分只能为整数，请重新输入！
+        </span>
+      </small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="address">公司地址</label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.address" class="form-control" name="address" id="address">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-10 offset-2">
+      <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid"><i class="far fa-save"></i>保存
+      </button>
+    </div>
+  </div>
+</form>

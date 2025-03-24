@@ -1,0 +1,20 @@
+<ng-select (add)="onAdd($event)"
+           (change)="onChange($event)"
+           [(ngModel)]="selectedItems"
+           [addTag]="true"
+           [hideSelected]="true"
+           [items]="items$ | async"
+           [loading]="loading"
+           [minTermLength]="0"
+           [multiple]="true"
+           [trackByFn]="trackByFn"
+           [typeahead]="searchKey$"
+           addTagText="添加"
+           bindLabel="name"
+           typeToSearchText='请输入关键字'>
+</ng-select>
+<!--<br>-->
+
+<!--<div style="margin-bottom:100px">-->
+<!--  Selected items: {{selectedItems | json}}-->
+<!--</div>-->

@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>招聘详情</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-text *ngIf="job">
+    <h3 class="text-primary">{{job.title}}</h3>
+    <p>截止日期：{{job.endDate}}<br><b>来源：</b> {{job.origin}}</p>
+    <hr>
+    <p class="text-indent-2" [innerHTML]="job.content | safe"></p>
+  </ion-text>
+</ion-content>
+
+

@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+div.jasmine_html-reporter div.jasmine-results div.jasmine-summary ul.jasmine-suite {
+  display: none;
+}
+
+/*仅显示第一个报告*/
+div.jasmine_html-reporter div.jasmine-results div.jasmine-summary ul.jasmine-suite:first-child {
+  display: block;
+}
+
+body {
+  background-color: white;
+}
+//https://stackoverflow.com/questions/8903313/using-regular-expression-in-css
+body > div[id^='root'] {
+  width: 400px;
+  height: 700px;
+  border: 1px solid red;
+  left: auto;
+  right: 0;
+  top: auto;
+  bottom: 0;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+  contain: layout size style;
+  overflow: hidden;
+  z-index: 0;
+}

@@ -1,0 +1,18 @@
+<ion-list>
+  <ion-list-header>
+    通知公告
+  </ion-list-header>
+
+  <ion-item *ngFor="let notice of items" routerLink="./{{notice.id}}">
+    <ion-thumbnail slot="start">
+      <img alt="{{notice.image?.name}}" [src]="notice.image | imageUrl"/>
+    </ion-thumbnail>
+    <ion-label>
+      <h2>{{notice.title}}</h2>
+      <h3 class="text-secondary">{{notice.subTitle}}</h3>
+      <div [innerHTML]="notice.summary"></div>
+    </ion-label>
+  </ion-item>
+  <ion-progress-bar type="indeterminate" reversed="true" *ngIf="beLoading"></ion-progress-bar>
+</ion-list>
+

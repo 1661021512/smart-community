@@ -1,0 +1,9 @@
+<select class="form-control" [formControl]="educationSelected">
+  <option *ngIf="isShowPleaseSelect" [ngValue]="null">
+    请选择
+  </option>
+  <option *ngFor="let education of educations" [ngValue]="education.id">
+    {{education.name}}
+  </option>
+</select>
+

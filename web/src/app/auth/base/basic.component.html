@@ -1,0 +1,50 @@
+<div #main>
+  <div class="main">
+    <div class="main-login-warp">
+      <div class="login bg-white p-5" #login>
+        <div class="row">
+          <div class="col-md-6 border-right" routerLink="./login"
+               routerLinkActive="active" (click)="onChangeToLogin()">
+            <h6 class="text-center" [ngClass]="{'text-success font-weight-bolder' : mode === 'login'}">
+              <a href="javascript:void(0);" class="text-reset text-decoration-none">登录</a>
+            </h6>
+          </div>
+          <div class="col-md-6" (click)="onChangeToResetPassword()" routerLink="./resetPassword"
+               routerLinkActive="active">
+            <h6 class="text-center" [ngClass]="{'text-success font-weight-bolder' : mode === 'resetPassword'}">
+              <a href="javascript:void(0);"
+                 class="text-reset text-decoration-none">重置密码</a>
+            </h6>
+          </div>
+        </div>
+        <hr>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <div class="carousel slide" data-ride="carousel">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active image0">
+          <div class="carousel-caption">
+          </div>
+        </div>
+        <div class="item image1">
+          <div class="carousel-caption">
+          </div>
+        </div>
+        <div class="item image2">
+          <div class="carousel-caption">
+          </div>
+        </div>
+        <div class="item image3">
+          <div class="carousel-caption">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer text-center p-2">
+    尚义县人民政府党委组织部©1949-{{year}} <span class="text-secondary">版本号:{{version}}</span>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<ion-item >
+  <ion-item>
+    <ion-badge color="success">男</ion-badge>
+    <ion-checkbox slot="start" (click)="falseFormControl.setValue(false)" [formControl]="trueFormControl"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-badge color="secondary" >女</ion-badge>
+    <ion-checkbox slot="start" (click)="trueFormControl.setValue(false)" [formControl]="falseFormControl"></ion-checkbox>
+  </ion-item>
+</ion-item>

@@ -1,0 +1,88 @@
+<form [formGroup]="queryForm">
+  <div class="form-row">
+    <div class="form-group col-md-2 spacing spacing-left">
+      <label>姓名</label>
+      <input [formControlName]="keys.name" class="form-control" placeholder="姓名..." type="text">
+    </div>
+    <div class="form-group col-md-1 spacing">
+      <label>性别</label>
+      <select [formControlName]="keys.sex" class="form-control">
+        <option [value]="null">全部</option>
+        <option [value]="1">男</option>
+        <option [value]="0">女</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4 col-xs-3">
+      <div class="row pl-5">
+        <label>年龄</label></div>
+      <div class="row pl-md-2 pl-lg-5 pr-2">
+        <div class="proportion col-md-5">
+          <input [formControlName]="keys.ageBegin" class="form-control" type="number">
+        </div>
+        <div class="line text-center col-md-1"><label>至</label></div>
+        <div class="proportion col-md-5 pl-3">
+          <input [formControlName]="keys.ageEnd" class="form-control" type="number">
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4 spacing">
+      <label>身份证号</label>
+      <input [formControlName]="keys.idNumber" class="form-control" placeholder="身份证id..." type="text">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-2 spacing spacing-left">
+      <label>电话</label>
+      <input [formControlName]="keys.phone" class="form-control" placeholder="电话号..." type="text">
+    </div>
+    <div class="form-group col-md-1 spacing">
+      <label>民族</label>
+      <app-nationality-select [formControlName]="keys.nationality"></app-nationality-select>
+    </div>
+    <div class="form-group col-md-2 spacing">
+      <label>文化程度</label>
+      <app-education-select [formControlName]="keys.education"></app-education-select>
+    </div>
+    <div class="form-group col-md-2 spacing">
+      <label>政治面貌</label>
+      <app-political-climate-select [formControlName]="keys.politicalClimate"></app-political-climate-select>
+    </div>
+    <div class="form-group col-md-1 spacing">
+      <label>宗教</label>
+      <input [formControlName]="keys.religion" class="form-control" placeholder="宗教名称..." type="text">
+    </div>
+    <div class="form-group col-md-2 spacing">
+      <label>工作单位</label>
+      <input [formControlName]="keys.workPlace" class="form-control" placeholder="公司名称..." type="text">
+    </div>
+    <div class="form-group col-md-2 text-left align-self-end search">
+      <button (click)="onReset()" class="btn btn-warning" type="button">
+        <i class="fas fa-trash-alt"></i> 重置
+      </button>
+    </div>
+  </div>
+</form>
+<hr>
+<div class="row">
+  <div class="col-12 d-flex flex-row align-items-end overflow-auto" *ngIf="building">
+    <div *ngFor="let unit of building.units" class="unit border border-success">
+      <div class="row">
+        <div class="col">
+          <div class="floor" *ngFor="let floor of unit._floors">
+            <div class="house text-center"
+                 [ngStyle]="{'flex': getFlex(floor)}"
+                 *ngFor="let house of floor">
+              <app-residents [house]="house"
+                             [filter]="filter"></app-residents>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h6 class="text-center">{{unit.name}}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

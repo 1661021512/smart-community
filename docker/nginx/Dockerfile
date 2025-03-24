@@ -1,0 +1,1 @@
+FROM registry.cn-beijing.aliyuncs.com/mengyunzhi/nginx:1.13.12

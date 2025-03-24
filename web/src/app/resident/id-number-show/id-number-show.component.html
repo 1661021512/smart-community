@@ -1,0 +1,3 @@
+<ng-container *ngIf="resident">
+  {{resident.encodedIdNumber}}<i class="fa fa-eye text-success" (click)="getIdNumber(resident)" *ngIf="show"></i>
+</ng-container>

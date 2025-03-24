@@ -1,0 +1,38 @@
+<ion-content *ngIf="volunteerActivity" >
+  <ion-card class="min-vh-100">
+    <ion-img src="/assets/image/header.png"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>计划招募{{volunteerActivity.numberOfPlanned}}人</ion-card-subtitle>
+      <ion-card-title>{{volunteerActivity.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text>
+        <p>
+          发起组织：{{volunteerActivity.initiator}}
+          <br>
+          联系人　：{{volunteerActivity.contact}}
+          <br>
+          活动地点：{{volunteerActivity.place}}
+          <br>
+          结束日期：{{volunteerActivity.endDate | intDateToTimestamp | date: 'yyyy-MM-dd'}}
+          <br>
+          已报名　：{{volunteerActivity.numberOfApplicants}}人
+          <br>
+          已招募　：{{volunteerActivity.numberOfAudited}}人
+        </p>
+      </ion-text>
+      <hr>
+      <ion-text [innerHTML]="volunteerActivity.detail | safe">
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer class="ion-no-border" *ngIf="showButton">
+  <ion-toolbar>
+    <ion-button size="default" expand="block" *ngIf="!signUpEd && !activityExpired"
+                routerLink="./signUp/{{volunteerActivity.id}}">我要报名
+    </ion-button>
+    <ion-button size="default" expand="block" routerLink="./result/{{volunteerActivity.id}}" *ngIf="signUpEd">查看报名结果
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

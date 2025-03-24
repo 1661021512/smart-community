@@ -1,0 +1,31 @@
+<!--    <tr>-->
+<!--      <td>-->
+<!--        {{formGroup.get(formKeys.houses).invalid | json}}-->
+<!--        住房信息: <small *ngIf="formGroup.get(formKeys.houses).invalid">必须为添加的住房指定具体信息</small>-->
+<!--      </td>-->
+<!--      <td [colSpan]="3" class="text-left">-->
+<!--        <button (click)="onAddHouse()" class="btn btn-outline-primary btn-sm" type="button"><i class="fa fa-plus"></i>添加住房-->
+<!--        </button>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    <tr *ngFor="let house of resident.houses; index as i">-->
+<!--      <td>住址&nbsp;{{i + 1}}</td>-->
+<!--      <td colspan="3">-->
+<!--        <ng-container *ngIf="house._editable">-->
+<!--          <div class="row">-->
+<!--            <div class="col">-->
+<!--              <app-house-choose [formControl]="house._formControl"></app-house-choose>-->
+<!--            </div>-->
+<!--            <div class="col-3 align-self-end">-->
+<!--              <button (click)="onAddHouseClick(house)" [disabled]="!house.id" class="btn btn-outline-primary btn-sm"><i-->
+<!--                class="fa fa-plus"></i>确认-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ng-container>-->
+<!--        <ng-container *ngIf="!house._editable">-->
+<!--          {{house.village.community.name}} - {{house.village.name}} - {{house.unit.name}} - {{house.name}}-->
+<!--          <span (click)="onRemoveHouse(i, resident.houses)" class="badge badge-danger badge-click"><i-->
+<!--            class="fas fa-trash-alt"></i>移除</span>-->
+<!--        </ng-container>-->
+<!--    </tr>-->

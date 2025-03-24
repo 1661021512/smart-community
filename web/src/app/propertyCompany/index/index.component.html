@@ -1,0 +1,72 @@
+<div style="background-color: white" [formGroup]="queryForm">
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label>名称</label>
+        <input type="input" [formControlName]="keys.name" class="form-control" placeholder="请输入要查询的名称">
+      </div>
+      <div class="form-group col-md-3 text-left align-self-end search">
+        <button type="submit" class="btn btn-info" (click)="onSubmit(queryForm)">
+          <i class="fas fa-search"></i> 查询
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="row mb-2">
+    <div class="col-10 text-right">
+      <a class="btn btn-primary" routerLink="add"><i class="fas fa-plus"></i>新增</a>
+    </div>
+  </div>
+  <yz-size (changeSize)="onSizeChange($event)" [size]="pageData.size"></yz-size>
+  <table class="table table-striped mt-2">
+    <thead>
+    <tr class="table-primary">
+      <th>序号</th>
+      <th>物业名称</th>
+      <th>法人</th>
+      <th>联系人</th>
+      <th>联系电话</th>
+      <th>备用联系人</th>
+      <th>备用联系电话</th>
+      <th>负责小区</th>
+      <th>综合评分</th>
+      <th>评分排名</th>
+      <th>及时响应率</th>
+      <th>注册时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let propertyCompany of pageData.content; index as i">
+      <td>{{i + 1}}</td>
+      <td>{{propertyCompany.name}}</td>
+      <td>{{propertyCompany.legalPerson}}</td>
+      <td>{{propertyCompany.contacts}}</td>
+      <td>{{propertyCompany.phone}}</td>
+      <td>{{propertyCompany.alternateContact}}</td>
+      <td>{{propertyCompany.alternatePhone}}</td>
+      <td>
+        <label *ngFor="let village of propertyCompany.villages">
+          {{village.name}}&nbsp;
+        </label>
+      </td>
+      <td>{{propertyCompany.score}}</td>
+      <td>{{propertyCompany.scoreRank}}</td>
+      <td>{{propertyCompany.timelyResponseRate}}%</td>
+      <td>{{propertyCompany.createTime | date: 'yyyy-MM-dd'}}</td>
+      <td>
+        <a class="btn btn-outline-primary btn-sm" routerLink="detail/{{propertyCompany.id}}">
+          <i class="fas fa-eye"></i>查看
+        </a>
+        <span (click)="onDelete(propertyCompany)" class="btn btn-sm btn-outline-danger">
+        <i class="far fa-trash-alt"></i>删除
+        </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <yz-page (changePage)="onPageChange($event)" *ngIf="pageData.content"
+           [page]="pageData.number"
+           [size]="pageData.size"
+           [totalElements]="pageData.totalElements"></yz-page>
+</div>

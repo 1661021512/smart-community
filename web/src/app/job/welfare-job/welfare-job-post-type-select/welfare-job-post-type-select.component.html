@@ -1,0 +1,6 @@
+<select class="form-control" [formControl]="welfareJobPostTypeSelected" >
+  <option *ngIf="state.showPleaseSelect" [ngValue]="null">全部</option>
+  <option *ngFor="let welfareJobPostType of welfareJobPostTypes"  [ngValue]="welfareJobPostType.id">
+    {{welfareJobPostType.name}}
+  </option>
+</select>

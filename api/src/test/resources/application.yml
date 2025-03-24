@@ -1,0 +1,139 @@
+spring:
+  profiles:
+    # demo: 演示环境，内置数据库；pro 生产环境，mysql数据库
+    active: ${active:ci}
+  # hibernate 数据库 验证级别
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: ${show-sql:false}
+    # 在同一请求中使用同一个EntityManager
+    # https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot
+  #    open-in-view: false
+  # 启用 flyway
+  flyway:
+    enabled: true
+
+  # 上传文件大小限制
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: ${file.size:20MB}
+      max-request-size: ${file.size:20MB}
+
+server:
+  # 配置端口
+  port: ${port:8081}
+  servlet:
+    session:
+      timeout: 60m
+app:
+  # 短消息类型
+  sms-type: ${sms-type:local}
+  # 初始化管理员用户名
+  username: ${default-username:13920618851}
+  # 初始化管理员密码
+  password: ${default-password:yunzhi}
+  #  短信平台
+  sms:
+    access-key-id: 8TkA3lc5Vo8ub2Cj
+    access-secret: 3Q7OleKWhQuDlWPJ3rrXCkO3iYKAzj
+    sign-name: 金耕科技
+
+---
+spring:
+  config:
+    activate:
+      on-profile: pro
+  jpa:
+    hibernate:
+      ddl-auto: ${ddl-auto:validate}
+    show-sql: ${show-sql:true}
+  flyway:
+    enabled: true
+  # 配置数据源
+  datasource:
+    url: jdbc:mysql://${datasource.url:cd.mengyunzhi.com}:${datasource.port:3609}/${datasource.dbname:smartcommunity}?useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${datasource.username:smartcommunity}
+    password: ${datasource.password:O800dr9n9Xij6vphor6NW80AyCNpScbc62IgyGNP}
+logging:
+  level:
+    root: info
+    club:
+      yunzhi:
+        exam: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: hzl
+  jpa:
+    hibernate:
+      ddl-auto: ${ddl-auto:update}
+    show-sql: ${show-sql:true}
+  flyway:
+    enabled: true
+  # 配置数据源
+  datasource:
+    url: jdbc:mysql://${datasource.url:localhost}:${datasource.port:3306}/${datasource.dbname:smartcommunity}?useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${datasource.username:root}
+    password: ${datasource.password:}
+logging:
+  level:
+    root: info
+    club:
+      yunzhi:
+        exam: debug
+
+---
+# PJ专用数据库
+spring:
+  config:
+    activate:
+      on-profile: dev-pj
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:mysql://${datasource.url:192.168.0.3}:${datasource.port:3633}/${datasource.dbname:smartcommunity}?useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${datasource.username:root}
+    password: ${datasource.password:yunzhi.club}
+---
+spring:
+  config:
+    activate:
+      on-profile: demo
+  jpa:
+    hibernate:
+      ddl-auto: update
+  flyway:
+    enabled: false
+  # H2数据源,请在当前用户所有文件夹下建立data文件夹，并保证其可写
+  # 或者自行指定其它文件位置
+  # 如果需要重置数据库，仅需要删除该目录下的文件即可
+  datasource:
+    url: jdbc:h2:~/h2/smartcommunity
+    username: sa
+  sql:
+    init:
+      # 当ddl-auto不为none时，系统初始化时均执行schema-${platform}.sql或data-${platform}.sql.
+      # platform 的值取决于jpa.datasource.platform
+      mode: always
+      platform: h2
+  h2:
+    console:
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: ci
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false

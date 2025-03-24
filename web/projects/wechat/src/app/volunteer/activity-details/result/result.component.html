@@ -1,0 +1,30 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>查看报名结果</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row class="text-center" *ngIf="signUp" >
+      <ion-col *ngIf="signUp.status === signUpStatus.new.value">
+        <ion-icon class="ion-success" name="happy-outline"></ion-icon>
+        <p>报名成功，审核中</p>
+      </ion-col>
+      <ion-col *ngIf="signUp.status === signUpStatus.accept.value">
+        <ion-icon class="ion-success" name="checkmark-circle-outline"></ion-icon>
+        <p>恭喜您，审核通过</p>
+      </ion-col>
+      <ion-col *ngIf="signUp.status === signUpStatus.refuse.value">
+        <ion-icon class="ion-fail" name="close-circle-outline"></ion-icon>
+        <p>遗憾您未通过审核</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-button size="default" expand="block" (click)="onBack()">返回
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

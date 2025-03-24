@@ -1,0 +1,9 @@
+<select class="form-control" [formControl]="community3dSelected">
+  <option *ngIf="isShowPleaseSelect" [ngValue]="null">
+    全部社区模型
+  </option>
+  <option *ngFor="let community3d of community3ds" [ngValue]="community3d.id">
+    {{community3d.name}}
+  </option>
+</select>
+

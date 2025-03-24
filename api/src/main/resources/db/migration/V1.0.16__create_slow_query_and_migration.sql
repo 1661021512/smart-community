@@ -1,0 +1,3 @@
+create table migration (id bigint not null auto_increment, batch varchar(255), primary key (id)) engine=InnoDB;
+create table slow_query (id bigint not null auto_increment, body varchar(255), exception varchar(255), ip varchar(255), method varchar(255), params varchar(255), request_time datetime(6), response_time datetime(6), url varchar(255), primary key (id)) engine=InnoDB;
+alter table migration add constraint UK_cwdo9pwwcw6s2jdii6xi9gqgo unique (batch);

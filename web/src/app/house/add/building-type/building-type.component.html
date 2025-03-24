@@ -1,0 +1,113 @@
+<form (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup">
+  <table class="table table-bordered table-striped">
+    <tbody>
+    <tr>
+      <td class="text-right" *ngIf="houseType === houseTypes.bungalow.value">片区<code>*</code></td>
+      <td class="text-right" *ngIf="houseType === houseTypes.building.value">小区<code>*</code></td>
+      <td colspan="3">
+        <app-village-select [houseType]="houseType" [formControlName]="formKeys.villageId"></app-village-select>
+      </td>
+    </tr>
+
+     <!--楼房-->
+    <tr *ngIf="houseType === houseTypes.building.value">
+      <td class="text-right">楼栋<code>*</code></td>
+      <td>
+        <app-building-select [formControlName]="formKeys.buildingId"
+                             [villageId]="formGroup.get(formKeys.villageId).value"></app-building-select>
+      </td>
+      <td class="text-right">
+        <button type="button" class="btn btn-info btn-sm"
+                *ngIf="formGroup.get(formKeys.buildingId).value"
+        (click)="onClickModal()">
+          <i id="add" class="fas fa-plus"></i>
+        </button>
+        单元<code>*</code>
+      </td>
+      <td>
+        <app-unit-select *ngIf="showUnitFormControl" [buildingId]="formGroup.get(formKeys.buildingId).value" [formControlName]="formKeys.unitId"
+                         appValidatorClass></app-unit-select>
+      </td>
+    </tr>
+    <tr *ngIf="houseType === houseTypes.building.value">
+      <td class="text-right">层数<code>*</code></td>
+      <td>
+        <input [formControlName]="formKeys.floor" [max]="maxFloor" appValidatorClass class="form-control" type="number">
+      </td>
+      <td class="text-right">门牌号<code>*</code></td>
+      <td><input [formControlName]="formKeys.name" appValidatorClass class="form-control" type="text"></td>
+    </tr>
+
+
+     <!--平房-->
+    <tr *ngIf="houseType === houseTypes.bungalow.value">
+      <td class="text-right">排<code>*</code></td>
+      <td>
+        <app-building-select [formControlName]="formKeys.buildingId"
+                             [villageId]="formGroup.get(formKeys.villageId).value"></app-building-select>
+      </td>
+      <td class="text-right">门牌号<code>*</code></td>
+      <td><input [formControlName]="formKeys.name" appValidatorClass class="form-control" type="text"></td>
+    </tr>
+
+    <!--共同部分-->
+    <tr>
+      <td class="text-right">房屋性质<code>*</code></td>
+      <td>
+        <app-house-own-type-radio [formControlName]="formKeys.type"
+                                  [showSelectAll]="false"></app-house-own-type-radio>
+      </td>
+      <td class="text-right">入住时间</td>
+      <td>
+        <yz-date [formControlName]="formKeys.checkInTime"></yz-date>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">享有保障性住房</td>
+      <td>
+        <app-true-or-false [formControlName]="formKeys.lowIncoming"></app-true-or-false>
+
+      </td>
+      <td class="text-right">享受减免房屋补贴</td>
+      <td>
+        <app-true-or-false [formControlName]="formKeys.relief"></app-true-or-false>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">房屋面积(m²)</td>
+      <td>
+        <input [formControlName]="formKeys.area" class="form-control" type="number">
+      </td>
+      <td class="text-right">权重(决定房屋顺序)<code>*</code></td>
+      <td><input [formControlName]="formKeys.weight" appValidatorClass class="form-control" type="text"></td>
+    </tr>
+    <tr>
+      <td class="text-right">备注</td>
+      <td colspan="3">
+        <input [formControlName]="formKeys.remarks" class="form-control" type="text">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-12 text-center">
+      <button [disabled]="formGroup.invalid" class="btn btn-primary" type="submit"><i class="fa fa-save"></i>保存</button>
+    </div>
+  </div>
+</form>
+
+
+<yz-modal *ngIf="showModal" width="50%">
+  <form (ngSubmit)="unitOnSubmit(unitFormGroup)" [formGroup]="unitFormGroup" class="container-fluid p-2">
+    <div class="mt-2 mb-2 row">
+      <label class="col-2 text-right col-form-label">名称</label>
+      <div class="col-10">
+        <input [formControlName]="formKeys.unitName"  appValidatorClass class="form-control" type="text">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button (click)="onCloseModal()" class="btn btn-default" type="button">取消</button>
+      <button [disabled]="unitFormGroup.invalid" class="btn btn-primary" type="submit">确认</button>
+    </div>
+  </form>
+</yz-modal>

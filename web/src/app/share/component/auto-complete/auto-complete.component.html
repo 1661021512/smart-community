@@ -1,0 +1,14 @@
+<!--https://www.npmjs.com/package/angular-ng-autocomplete#getting-started-->
+<div class="ng-autocomplete">
+  <ng-autocomplete (inputChanged)='onChangeSearch($event)'
+                   (selected)='selectEvent($event)'
+                   [data]="items"
+                   [debounceTime]="500"
+                   [itemTemplate]="itemTemplate"
+                   [ngModel]="formControl.value"
+                   [searchKeyword]="keyword">
+  </ng-autocomplete>
+  <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.name"></a>
+  </ng-template>
+</div>

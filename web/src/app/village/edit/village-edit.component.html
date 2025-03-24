@@ -1,0 +1,60 @@
+<form (ngSubmit)="onSubmit(formGroup)" *ngIf="village" [formGroup]="formGroup" class="container-sm">
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label" for="name">名称<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.name" appValidatorClass class="form-control"  id="name" name="name" type="text">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label" for="pinyin">拼音<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.pinyin" appValidatorClass class="form-control" id="pinyin" name="pinyin" type="text">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">经度<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.longitude" appValidatorClass class="form-control" id="longitude"  type="number" >
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">纬度<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.latitude" appValidatorClass class="form-control" id="latitude"  type="number" >
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">建成日期<code>*</code></label>
+    <div class="col-sm-10">
+      <yz-date [formControlName]="formKeys.establishTime" ></yz-date>
+      <small *ngIf="formGroup.get(formKeys.establishTime).invalid" class="text-danger">请选择建成日期</small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">乡镇<code>*</code></label>
+    <div *ngIf="!isDefaultTown" class="col-sm-10">
+      <app-town-select [formControlName]="formKeys.townId" [showAllTown]="false"></app-town-select>
+      <small *ngIf="formGroup.get(formKeys.townId).invalid" class="text-danger">请选择一个乡镇</small>
+    </div>
+    <div *ngIf="isDefaultTown" class="col-sm-10 col-form-label">
+      {{this.defaultTown}}
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">社区<code>*</code></label>
+    <div *ngIf="!isDefaultCommunity" class="col-sm-10">
+      <app-community-select [formControlName]="formKeys.communityId"
+                            [townId]="formGroup.get(formKeys.townId).value" ></app-community-select>
+      <small *ngIf="formGroup.get(formKeys.communityId).invalid" class="text-danger">请选择一个社区</small>
+    </div>
+    <div *ngIf="isDefaultCommunity" class="col-sm-10 col-form-label">
+      {{this.defaultCommunity}}
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-10 offset-2">
+      <button [disabled]="formGroup.invalid" class="btn btn-primary" type="submit"><i class="fas fa-save"></i>保存
+      </button>
+    </div>
+  </div>
+</form>

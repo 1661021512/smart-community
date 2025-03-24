@@ -1,0 +1,103 @@
+<form (submit)="onSubmit(queryForm)" [formGroup]="queryForm">
+  <div class="form-row">
+    <div class="form-group col-md-2 spacing spacing-left">
+      <label>姓名</label>
+      <input [formControlName]="formKeys.name" class="form-control" placeholder="姓名..." type="text">
+    </div>
+    <div class="form-group col-md-1 spacing">
+      <label>性别</label>
+      <select [formControlName]="formKeys.sex" class="form-control">
+        <option [value]="null">全部</option>
+        <option [value]="1">男</option>
+        <option [value]="0">女</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2 text-center spacing">
+      <div class="row text-right">
+        <label>年龄</label>
+      </div>
+      <div class="row">
+        <div class="proportion col-md-5">
+          <input [formControlName]="formKeys.ageStart" class="form-control" type="number">
+        </div>
+        <div class="line text-center col-md-2"><label>至</label></div>
+        <div class="proportion col-md-5">
+          <input [formControlName]="formKeys.ageEnd" class="form-control" type="number">
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-2 spacing">
+      <label>电话</label>
+      <input [formControlName]="formKeys.phone" class="form-control" placeholder="电话..." type="text">
+    </div>
+    <div class="form-group col-md-2">
+      <label>工作单位</label>
+      <input [formControlName]="formKeys.workPlace" class="form-control" placeholder="工作单位..." type="text">
+    </div>
+    <div class="form-group col-md-2">
+      <label>岗位类型</label>
+      <app-welfare-job-post-type-select [formControlName]="formKeys.postType"></app-welfare-job-post-type-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8"></div>
+    <div class="form-group text-right align-self-end search col-md-4">
+      <button (click)="onReset()" class="btn btn-warning" type="button">
+        <i class="fas fa-trash-alt"></i> 重置
+      </button>
+      <button class="btn btn-info" type="submit">
+        <i class="fas fa-search"></i> 查询
+      </button>
+    </div>
+  </div>
+</form>
+<hr>
+<div class="row mb-2">
+  <div class="col-12 text-right">
+    <a class="btn btn-primary" routerLink="add"><i class="fas fa-plus"></i>新增</a>
+  </div>
+</div>
+<yz-size (changeSize)="onSizeChange($event)" [size]="pageData.size"></yz-size>
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>年龄</th>
+    <th>电话</th>
+    <th>工作单位</th>
+    <th>职位</th>
+    <th>岗位类型</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let welfareJob of pageData.content; index as i">
+    <td>{{pageData.size * pageData.number + i + 1}}</td>
+    <td>{{welfareJob.name}}</td>
+    <td [innerHTML]="welfareJob.sex | sex"></td>
+    <td>{{welfareJob.birthday | birthdayAge}}</td>
+    <td>{{welfareJob.phone}}</td>
+    <td>{{welfareJob.workPlace}}</td>
+    <td>{{welfareJob.post}}</td>
+    <td>{{welfareJob.postType | welfarePostType}}</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm" routerLink="edit">
+        <i class="fas fa-pen"></i>编辑
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-eye"></i>详情
+      </span>
+      <span (click)="onDelete(i, welfareJob.id)" class="btn btn-outline-danger btn-sm">
+        <i class="fas fa-trash-alt"></i>删除
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<yz-page (changePage)="onPageChange($event)"
+         [page]="pageData.number"
+         [size]="pageData.size"
+         [totalElements]="pageData.totalElements"></yz-page>
+

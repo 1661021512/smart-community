@@ -1,0 +1,39 @@
+<form (submit)="onSubmit()" [formGroup]="formGroup" class="form-group">
+  <div class="form-row">
+    <label class="col-2 text-right col-form-label" *ngIf="building.houseType === buildingType" >单元数：</label>
+    <label class="col-2 text-right col-form-label" *ngIf="building.houseType === bungalowType" >排数：</label>
+    <div class="col-2  col-form-label">
+      <input [formControlName]="keys.unitCount" appValidatorClass class="form-control" type="number">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="col-2 text-right col-form-label"  *ngIf="building.houseType === buildingType" >层数：</label>
+    <label class="col-2 text-right col-form-label"  *ngIf="building.houseType === bungalowType" >户数：</label>
+    <div class="col-2  col-form-label">
+      <input [formControlName]="keys.maxFloor" appValidatorClass class="form-control" type="number">
+    </div>
+  </div>
+  <div class="form-row" *ngIf="building.houseType === buildingType" >
+    <label class="col-2 text-right col-form-label">每层户数：</label>
+    <div class="col-2  col-form-label">
+      <input [formControlName]="keys.housesLengthOfFloor" appValidatorClass class="form-control" type="number">
+    </div>
+  </div>
+  <div *ngIf="showButton()" class="form-row">
+    <div class="col-10 offset-2">
+      <span><button (click)="onBatchGenerate(formGroup)"
+                    [disabled]="formGroup.invalid" class="btn btn-primary"
+                    type="button">快速生成住房</button></span>
+      <button [disabled]="formGroup.invalid || !generated" class="btn btn-primary" type="submit">保存</button>
+    </div>
+  </div>
+
+</form>
+<app-units (doHousesChange)="doHousesChange()" [units]="building.units"></app-units>
+<div class="row">
+  <div class="col-12 text-center">
+    <app-demo *ngIf="showDemo" [units]="building.units"></app-demo>
+  </div>
+</div>
+

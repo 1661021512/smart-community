@@ -1,0 +1,123 @@
+@import './../../../var';
+
+$border-color: #034c6a;
+
+.pe-d-main {
+  background-color: $main-background-color;
+  color: white;
+  padding-bottom: 10em;
+
+  h3 {
+    padding: 0 0.3em;
+    border-left: 0.5em solid $danger-background-color;
+    margin: 0.8em 0 0.5em;
+  }
+
+  ul, li {
+    list-style-type: none;
+  }
+
+  ul {
+    padding: 15px 10px;
+  }
+
+  li {
+    line-height: 1.5em;
+
+    .p-label {
+      width: 5em;
+      text-align: right;
+      vertical-align: text-top;
+    }
+
+    .text {
+      width: calc(100% - 5em);
+      vertical-align: text-top;
+    }
+  }
+
+  .title {
+    border-bottom: 1px solid $border-color;
+  }
+
+  .left {
+    border-right: 1px solid $border-color;
+  }
+
+  .middle {
+    padding-top: 1em;
+
+    .row {
+      padding-top: 4em;
+    }
+
+    .center-img {
+      position: relative;
+    }
+
+    img {
+      max-height: 20em;
+      max-width: 30em;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      position: absolute;
+    }
+
+    .property {
+      .pe-d-icon {
+        height: 3em;
+        width: 3em;
+        border: 1em solid #336e7b;
+        padding: 3em;
+        border-radius: 50%;
+        position: relative;
+
+        svg {
+          color: #22a7f0;
+          position: absolute;
+          height: 3em;
+          width: 3em;
+          margin: 0;
+          top: 1.5em;
+          left: 1.5em;
+        }
+
+        .text {
+          color: whitesmoke;
+          position: absolute;
+          top: 4.8em;
+          font-weight: bold;
+          left: 0;
+          font-size: 1.5em;
+          width: 4em;
+        }
+      }
+    }
+  }
+
+  .right {
+    border-left: 1px solid $border-color;
+  }
+
+  .card {
+    margin-top: 1em;
+    margin-right: 1em;
+    padding: 0 0.5em 1em;
+    border-bottom: 1px solid #3F4069;
+
+    img {
+      float: left;
+      width: 33%;
+    }
+
+    ul {
+      float: left;
+      width: 67%;
+      padding: 0 1em;
+    }
+  }
+}
+

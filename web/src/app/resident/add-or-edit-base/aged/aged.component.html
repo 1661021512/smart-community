@@ -1,0 +1,83 @@
+<form [formGroup]="formGroup">
+  <table class="table table-bordered">
+    <tr>
+      <td>是否接种疫苗</td>
+      <td [colSpan]="formGroup.get(formKeys.beVaccinated).value !== null ? 1 : 3">
+        <app-true-or-false
+          [formControlName]="formKeys.beVaccinated" ></app-true-or-false>
+      </td>
+      <td *ngIf="formGroup.get(formKeys.beVaccinated).value === true">接种地点<code>*</code></td>
+      <td *ngIf="formGroup.get(formKeys.beVaccinated).value === true">
+        <input [formControlName]="formKeys.vaccinatedPlace"
+               class="form-control"  type="text" >
+      </td>
+      <td *ngIf="formGroup.get(formKeys.beVaccinated).value === false">原因</td>
+      <td *ngIf="formGroup.get(formKeys.beVaccinated).value === false">
+        <input [formControlName]="formKeys.notVaccinatedReason"
+               class="form-control"  type="text" >
+      </td>
+    </tr>
+    <tr>
+      <td>是否低保</td>
+      <td>
+        <app-true-or-false
+          [formControlName]="formKeys.beSubsistenceAllowances"></app-true-or-false>
+      </td>
+      <td>是否医保</td>
+      <td>
+        <app-true-or-false
+          [formControlName]="formKeys.beMedicalInsurance"></app-true-or-false>
+      </td>
+    </tr>
+    <tr>
+      <td>是否养老保险</td>
+      <td>
+        <app-true-or-false
+          [formControlName]="formKeys.beEndowmentInsurance"></app-true-or-false>
+      </td>
+      <td>是否高龄补贴</td>
+      <td>
+        <app-true-or-false
+          [formControlName]="formKeys.beOldAgeAllowance"></app-true-or-false>
+      </td>
+    </tr>
+    <tr>
+      <td>是否残疾</td>
+      <td>
+        <app-true-or-false
+          [formControlName]="formKeys.beDisabled"></app-true-or-false>
+      </td>
+      <td>是否孤寡</td>
+      <td>
+        <app-true-or-false
+          [formControlName]="formKeys.beLonelyOrWidowed"></app-true-or-false>
+      </td>
+    </tr>
+
+    <tr>
+      <td>是否有慢性病</td>
+      <td [colSpan]="formGroup.get(formKeys.beChronicDisease).value ? 1 : 3">
+        <app-true-or-false
+          [formControlName]="formKeys.beChronicDisease"></app-true-or-false>
+      </td>
+      <td *ngIf="formGroup.get(formKeys.beChronicDisease).value">慢性病描述<code>*</code></td>
+      <td *ngIf="formGroup.get(formKeys.beChronicDisease).value">
+        <input [formControlName]="formKeys.chronicDiseaseDetails" appValidatorClass class="form-control" type="text">
+      </td>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+      <td>是否空巢</td>
+      <td>
+        <app-true-or-false
+          [formControlName]="formKeys.beEmptyNest"></app-true-or-false>
+      </td>
+      <td>是否留守儿童</td>
+      <td>
+        <app-true-or-false
+          [formControlName]="formKeys.beLeftBehindChildren"></app-true-or-false>
+      </td>
+    </tr>
+  </table>
+</form>

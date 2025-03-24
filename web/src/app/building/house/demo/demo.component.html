@@ -1,0 +1,27 @@
+<!--利用flex布局实现-->
+<div class="d-flex flex-row align-items-end bd-highlight mb-3">
+  <div *ngFor="let unit of units">
+    <table class="table-bordered unit">
+      <tr *ngFor="let floor of unit._floors">
+        <td *ngFor="let house of floor">
+          <app-edit (doEdit)="onEdit($event)" [change$]="editingHouseChange$" [house]="house"></app-edit>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<yz-modal *ngIf="showModal" width="50%">
+  <form (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup" class="container-fluid p-2">
+    <div class="mt-2 mb-2 row">
+      <label class="col-2 text-right col-form-label">名称</label>
+      <div class="col-10">
+        <input [formControlName]="formKeys.name" class="form-control" type="text">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button (click)="onCloseModal()" class="btn btn-default" type="button">取消</button>
+      <button [disabled]="formGroup.invalid" class="btn btn-primary" type="submit">确认</button>
+    </div>
+  </form>
+</yz-modal>

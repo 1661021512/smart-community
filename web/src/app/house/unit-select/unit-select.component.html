@@ -1,0 +1,8 @@
+<select class="form-control" [formControl]="unitSelected">
+  <option [ngValue]="null">请选择</option>
+  <option *ngFor="let unit of units" [ngValue]="unit.id">
+    {{unit.name}}
+  </option>
+</select>
+
+

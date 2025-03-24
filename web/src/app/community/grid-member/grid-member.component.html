@@ -1,0 +1,212 @@
+<script src="grid-member.component.ts"></script>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-2 spacing spacing-left">
+      <label>姓名</label>
+      <input type="input" class="form-control"  placeholder="姓名...">
+    </div>
+    <div class="form-group col-md-2">
+      <label>网格片区</label>
+      <select class="form-control" name="select" >
+        <option>平山镇</option>
+        <option>平安小区</option>
+        <option>隆德镇</option>
+        <option>惠民社区</option>
+        <option>丽水湾</option>
+      </select>
+    </div>
+    <!--    <span class="input-position">-->
+    <!--        &lt;!&ndash;这里是input框，定位到select的上面&ndash;&gt;-->
+    <!--        <input type="text" name="select" placeholder="输入关键字" id="qlc_zdz">-->
+    <!--    </span>-->
+
+    <!--    <script>-->
+    <!--      &lt;!&ndash;将select的值赋给input框&ndash;&gt;-->
+    <!--      function qlcTrainS(idName) {-->
+    <!--        var arrValue=document.getElementById(idName).options[document.getElementById(idName).selectedIndex].value;-->
+    <!--        $("#"+idName+"").parent('span').next('span').children('input.ccdd').val(arrValue)-->
+    <!--      }-->
+    <!--    </script>-->
+    <div class="form-group col-md-1 text-left top">
+    <button type="submit" class="btn btn-info">
+      <i class="fas fa-trash-alt"></i> 重置
+    </button>
+  </div>
+    <div class="form-group col-md-1 text-left top">
+      <button type="submit" class="btn btn-info">
+        <i class="fas fa-search"></i> 查询
+      </button>
+    </div>
+  </div>
+</form>
+
+
+
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="checkAll"
+        >
+        <label class="custom-control-label" for="checkAll">全选</label>
+      </div>
+    </th>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>年龄</th>
+    <th>政治面貌</th>
+    <th>文化程度</th>
+    <th>电话</th>
+    <th>网格片区</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td class="text-center">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input">
+        <label class="custom-control-label"></label>
+      </div>
+    </td>
+    <td>AAA</td>
+    <td>男</td>
+    <td>25</td>
+    <td>团员</td>
+    <td>高中</td>
+    <td>13000000000</td>
+    <td>平安小区 3号楼</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-eye"></i>
+        详情
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-pen"></i>
+        编辑
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-trash-alt"></i>
+        删除
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-center">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input">
+        <label class="custom-control-label"></label>
+      </div>
+    </td>
+    <td>BBB</td>
+    <td>男</td>
+    <td>25</td>
+    <td>团员</td>
+    <td>高中</td>
+    <td>13000000000</td>
+    <td>平安小区 3号楼</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-eye"></i>
+        详情
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-pen"></i>
+        编辑
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-trash-alt"></i>
+        删除
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-center">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input">
+        <label class="custom-control-label"></label>
+      </div>
+    </td>
+    <td>CCC</td>
+    <td>男</td>
+    <td>25</td>
+    <td>团员</td>
+    <td>高中</td>
+    <td>13000000000</td>
+    <td>平安小区 3号楼</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-eye"></i>
+        详情
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-pen"></i>
+        编辑
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-trash-alt"></i>
+        删除
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-center">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input">
+        <label class="custom-control-label"></label>
+      </div>
+    </td>
+    <td>DDD</td>
+    <td>男</td>
+    <td>25</td>
+    <td>团员</td>
+    <td>高中</td>
+    <td>13000000000</td>
+    <td>平安小区 3号楼</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-eye"></i>
+        详情
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-pen"></i>
+        编辑
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-trash-alt"></i>
+        删除
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-center">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input">
+        <label class="custom-control-label"></label>
+      </div>
+    </td>
+    <td>EEE</td>
+    <td>男</td>
+    <td>25</td>
+    <td>团员</td>
+    <td>高中</td>
+    <td>13000000000</td>
+    <td>平安小区 3号楼</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-eye"></i>
+        详情
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-pen"></i>
+        编辑
+      </span>
+      <span class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-trash-alt"></i>
+        删除
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>

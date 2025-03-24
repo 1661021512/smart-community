@@ -1,0 +1,8 @@
+<select [formControl]="formControl" class="form-control">
+  <option *ngIf="isShowPleaseSelect" [ngValue]="null">
+    请选择
+  </option>
+  <option *ngFor="let status of statuses" [ngValue]="status.value">
+    {{status.description}}
+  </option>
+</select>

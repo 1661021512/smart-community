@@ -1,0 +1,2 @@
+create table vaccination_cache (id bigint not null auto_increment, date bigint, total bigint, vaccinated bigint, district_id bigint not null, primary key (id)) engine=InnoDB;
+alter table vaccination_cache add constraint FKs5iptbx8053yo3btee392b8qy foreign key (district_id) references district (id);

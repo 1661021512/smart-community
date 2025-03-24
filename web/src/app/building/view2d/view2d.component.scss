@@ -1,0 +1,18 @@
+.floor {
+  display: flex;
+  flex-wrap: wrap;
+  .house {
+    max-width: 100%;
+    width: 150px;
+    height: 90px;
+    border: 1px dotted #D6B656;
+  }
+  .house:first-child {
+    border-left: none;
+  }
+  .house:last-child {
+    border-right: none;
+  }
+}
+
+

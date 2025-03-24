@@ -1,0 +1,5 @@
+<label *ngFor="let object of list">
+  <input #input (change)="onChange(object.value, input.checked)"
+         [defaultChecked]="getDefaultChecked(object.value)" class="form-check-inline"
+         type="checkbox">{{object.name}}
+</label>

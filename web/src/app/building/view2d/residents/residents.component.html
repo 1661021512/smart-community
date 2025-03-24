@@ -1,0 +1,8 @@
+<!--先显示符合条件的，再显示所有的-->
+<div class="residents" [ngClass]="getBd(residents)">
+  <h6>{{house.name}}</h6>
+  <ng-container *ngFor="let resident of residents">
+    <i class="fas fa-male" *ngIf="resident.sex" [ngClass]="getClass(resident)"></i>
+    <i class="fas fa-female" *ngIf="!resident.sex" [ngClass]="getClass(resident)"></i>
+  </ng-container>
+</div>

@@ -1,0 +1,44 @@
+<div class="mb-3 row" [formGroup]="formGroup">
+  <label class="col-sm-2 col-form-label text-right">添加负责小区</label>
+  <div class="col-sm-10">
+    <app-village-select [formControlName]="formKeys.villageId"></app-village-select>
+    <button class="btn btn-success mt-2" type="button"
+            (click)="onAddVillage()"
+            [disabled]="!formGroup.get(formKeys.villageId).touched && !formGroup.get(formKeys.villageId).value">
+      <i class="fas fa-plus"></i>添加
+    </button>
+    <small class="text-danger" *ngIf="remind">
+        <span>
+          该小区已在列表中！
+        </span>
+    </small>
+  </div>
+</div>
+
+<div class="mb-3 row" *ngIf="villages.length !== 0">
+  <label class="col-sm-2 col-form-label text-right"><small>已添加小区：</small></label>
+  <div class="col-sm-10">
+    <div class="col-sm-10">
+      <table class="table table-striped mt-2">
+        <thead>
+        <tr class="table-primary">
+          <th>序号</th>
+          <th>小区名称</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let village of villages; index as i">
+          <td>{{i + 1}}</td>
+          <td>{{village.name}}</td>
+          <td>
+               <span class="btn btn-sm btn-outline-danger" (click)="OnDelete(i)">
+                  <i class="far fa-trash-alt"></i>移除
+               </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

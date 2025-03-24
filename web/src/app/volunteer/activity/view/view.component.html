@@ -1,0 +1,45 @@
+<div class="row container" *ngIf="volunteerActivity">
+  <div class="row ">
+    <div class="col-md-6">
+      <div>
+        <label class="col-md-4 text-right">名称:</label>
+        <label class="col-md-8">{{volunteerActivity.name}}</label>
+      </div>
+      <div class="row">
+        <label class="col-md-4 text-right">结束日期:</label>
+        <label class="col-md-8">{{volunteerActivity.endDate | date: 'yyyy-mm-dd'}}</label>
+      </div>
+      <div class="row">
+        <label class="col-md-4 text-right">联系人:</label>
+        <label class="col-md-8">{{volunteerActivity.contact}}</label>
+      </div>
+      <div class="row">
+        <label class="col-md-4 text-right">地点:</label>
+        <label class="col-md-8">{{volunteerActivity.place}}</label>
+      </div>
+      <div class="row">
+        <label class="col-md-4 text-right">计划招募人数:</label>
+        <label class="col-md-8">{{volunteerActivity.numberOfPlanned}}</label>
+      </div>
+      <div class="row">
+        <label class="col-md-4 text-right">已报名人数:</label>
+        <label class="col-md-8">{{volunteerActivity.numberOfAudited}}</label>
+      </div>
+      <div class="row">
+        <label class="col-md-4 text-right">已招募人数:</label>
+        <label class="col-md-8">{{volunteerActivity.numberOfApplicants}}</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <img alt="alt" class="img-responsive img-rounded " src="assets/images/1.gif">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="row">
+      <label class="col-md-2 text-center">活动详情:</label>
+      <label class="col-md-10 text-left ">{{volunteerActivity.detail}}</label>
+    </div>
+  </div>
+</div>

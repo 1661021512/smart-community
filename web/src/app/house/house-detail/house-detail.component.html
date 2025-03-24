@@ -1,0 +1,83 @@
+<div class="row mb-2">
+  <div class="col-12 text-right">
+    <app-back-button></app-back-button>
+  </div>
+</div>
+<table class="table table-bordered table-striped">
+  <tbody>
+  <tr>
+    <td class="text-right">位置</td>
+    <td colspan="3">
+      {{house.unit.building.village?.name}} - {{house.unit.building.name}} - {{house.unit.name}}
+    </td>
+  </tr>
+  <tr>
+    <td class="text-right">户间号</td>
+    <td>{{house.name}}</td>
+    <td class="text-right">权重(决定房屋顺序)</td>
+    <td>{{house.weight}}</td>
+  </tr>
+  <tr>
+    <td class="text-right">房屋性质</td>
+    <td [innerHTML]="house.type | owned"></td>
+    <td class="text-right">房屋面积(m²)</td>
+    <td>
+      {{house.area}}
+    </td>
+  </tr>
+  <tr>
+    <td class="text-right">享有保障性住房</td>
+    <td [innerHTML]="house.lowIncoming | trueOrFalse "></td>
+    <td class="text-right">享受减免房屋补贴</td>
+    <td [innerHTML]="house.relief | trueOrFalse"></td>
+
+  </tr>
+  <tr>
+    <td class="text-right">入住时间</td>
+    <td>
+      {{house.checkInTime | date: 'yyyy-MM-dd'}}
+    </td>
+    <td class="text-right">备注</td>
+    <td>
+      {{house.remarks}}
+    </td>
+  </tr>
+  </tbody>
+  <tr>
+    <td colspan="4">
+      <button (click)="showMore = !showMore" class="btn btn-block btn-outline-warning" type="button">显示居民信息</button>
+    </td>
+  </tr>
+</table>
+<table *ngIf="showMore" class="table table-bordered table-striped">
+  <tr>
+    <td>序号</td>
+    <td>姓名</td>
+    <td>性别</td>
+    <td>年龄</td>
+    <td>身份证号</td>
+    <td>电话</td>
+    <td>民族</td>
+    <td>宗教</td>
+    <td>文化程度</td>
+    <td>政治面貌</td>
+    <td>工作单位</td>
+    <td>与户主关系</td>
+  </tr>
+  <tr *ngFor="let resident of house.residents; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{resident.name}}</td>
+    <td [innerHTML]="resident.encodedIdNumber | idSex | sex"></td>
+    <td>{{resident.encodedIdNumber | idAge}}</td>
+    <td>
+      <app-id-number-show [resident]="resident"></app-id-number-show>
+    </td>
+    <app-phone-show [resident]="resident"></app-phone-show>
+    <td>{{resident.nationality | nationality}}</td>
+    <td>{{resident.religiousBelief?.name}}</td>
+    <td [innerHTML]="resident.education | education"></td>
+    <td [innerHTML]="resident.politicalClimate | politicalClimate"></td>
+    <td>{{resident.workPlace}}</td>
+    <td>{{resident.id | relationship: house.owner?.id | async}}</td>
+  </tr>
+</table>

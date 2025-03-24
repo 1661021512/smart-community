@@ -1,0 +1,35 @@
+<form (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup" class="container-sm" *ngIf="grider">
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">手机号<code>*</code></label>
+    <div class="col-sm-7">
+      {{grider.webUser.username}}
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right" for="name">姓名<code>*</code></label>
+    <div class="col-sm-7">
+      <input [formControlName]="this.formKeys.name" appValidatorClass placeholder="请填写姓名" type="text"
+             class="form-control"
+             name="name" id="name">
+      <small *ngIf="formGroup.get(this.formKeys.name).touched && formGroup.get(this.formKeys.name).invalid"
+             class="text-danger">
+        必填项
+      </small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">社区<code>*</code></label>
+    <div class="col-sm-7">
+      <app-region-select-of-current-user endDistrictType="community"
+                                         [filter]="districtFilter"
+                                         [formControlName]="formKeys.communityId"></app-region-select-of-current-user>
+      <small *ngIf="formGroup.get(formKeys.communityId).invalid" class="text-danger">请选择一个社区</small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-5 offset-2">
+      <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid"><i class="fas fa-save"></i>保存
+      </button>
+    </div>
+  </div>
+</form>

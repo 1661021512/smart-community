@@ -1,0 +1,63 @@
+<form class="container-sm" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup)">
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">车主<code>*</code></label>
+    <div class="col-sm-10">
+      <app-resident-auto-complete [formControlName]="formKeys.owner"></app-resident-auto-complete>
+      <small class="text-danger" *ngIf="formGroup.get(this.formKeys.owner)!.value !== null">
+        <span *ngIf="formGroup.get(this.formKeys.owner).value.id === null">
+          请选择已有的居民！
+        </span>
+      </small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="plateNumber">车牌号<code>*</code></label>
+    <div class="col-sm-10">
+      <input type="text" [formControlName]="formKeys.plateNumber" class="form-control" name="plateNumber" id="plateNumber">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right">车辆品牌<code>*</code></label>
+    <div class="col-sm-10">
+      <app-vehicle-brand-auto-complete [formControlName]="formKeys.vehicleBrand"></app-vehicle-brand-auto-complete>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right">车辆类型<code>*</code></label>
+    <div class="col-sm-10">
+      <app-vehicle-type-select [formControlName]="formKeys.vehicleTypeId"></app-vehicle-type-select>
+     </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right">车身颜色<code>*</code></label>
+    <div class="col-sm-10">
+      <app-vehicle-colour-select [formControlName]="formKeys.vehicleColour"></app-vehicle-colour-select>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="parkingSpaceNumber">停车位号码</label>
+    <div class="col-sm-10">
+      <input type="text"  [formControlName]="formKeys.parkingSpaceNumber" class="form-control" name="parkingSpaceNumber" id="parkingSpaceNumber">
+    </div>
+  </div>
+  <div class="mb-3 row"  *ngIf="formGroup.get(formKeys.parkingSpaceNumber).value">
+    <label class="col-sm-2 col-form-label text-right">停车位性质</label>
+    <div class="col-sm-10">
+      <yz-status-radio [isShowPleaseSelect]="false"
+                       [types]="parkingSpaceTypes"
+                       [formControlName]="formKeys.parkingSpaceType"></yz-status-radio>
+    </div>
+  </div>
+<!--  <div class="mb-3 row">-->
+<!--    <label class="col-sm-2 col-form-label text-right">管理人:<code>*</code></label>-->
+<!--    <div class="col-sm-10">-->
+<!--      <app-community-worker-select [formControlName]="formKeys.communityWorkerId"></app-community-worker-select>-->
+<!--    </div>-->
+<!--  </div>-->
+  <div class="mb-3 row">
+    <div class="col-sm-10 offset-2">
+      <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid"><i class="fas fa-save"></i>保存
+      </button>
+    </div>
+  </div>
+</form>

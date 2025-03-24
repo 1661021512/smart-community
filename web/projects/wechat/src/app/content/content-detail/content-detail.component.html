@@ -1,0 +1,4 @@
+<ion-content *ngIf="content">
+  <h3 *ngIf="showTitle">{{content.title}}</h3>
+  <ion-text [innerHTML]="content.content | safe"></ion-text>
+</ion-content>

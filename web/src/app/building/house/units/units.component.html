@@ -1,0 +1,16 @@
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li *ngFor="let unit of units; index as i" class="nav-item">
+        <span (click)="onActive(i)" [ngClass]="{'active': isActive(i)}" class="nav-link">{{unit.name}}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body text-left">
+    <div *ngFor="let unit of units; index as i">
+      <ng-container *ngIf="isActive(i)">
+        <app-unit (doHousesChange)="onHousesChange()" [unit]="unit"></app-unit>
+      </ng-container>
+    </div>
+  </div>
+</div>

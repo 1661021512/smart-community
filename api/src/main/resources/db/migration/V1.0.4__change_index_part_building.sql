@@ -1,0 +1,1 @@
+alter table part_building add constraint UKen6r02aphns5xnx1ogbbvhows unique (duty_id, district_id);

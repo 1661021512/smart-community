@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">姓名:</label>
+    <div class="col-sm-7">
+      <p class="col-form-label">{{this.welfareJob.name}}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">性别:</label>
+    <div class="col-sm-7">
+      <p class="col-form-label" [innerHTML]="welfareJob.sex | sex"></p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">出生日期:</label>
+    <div class="col-sm-7">
+      <p class="col-form-label">{{welfareJob.birthday | date: 'yyyy-MM-dd'}}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">年龄:</label>
+    <div class="col-sm-7">
+      <p class="col-form-label">{{welfareJob.birthday | birthdayAge}}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">电话:</label>
+    <div class="col-sm-7">
+      <p class="col-form-label">{{welfareJob.phone}}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">工作单位:</label>
+    <div class="col-sm-7">
+      <p class="col-form-label">{{welfareJob.workPlace}}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">职位:</label>
+    <div class="col-sm-7">
+      <p class="col-form-label">{{welfareJob.post}}</p>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 text-right col-form-label">岗位类型</label>
+    <div class="col-sm-7">
+      <p class="col-form-label">{{welfareJob.postType | welfarePostType}}</p>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col-10 offset-2 ">
+      <button class="btn btn-primary" type="button">
+        <i class="fas fa-angle-left"></i>返回
+      </button>
+    </div>
+  </div>
+</div>

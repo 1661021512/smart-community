@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>招聘信息</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content
+  [scrollEvents]="true"
+  (ionScrollEnd)="logScrollEnd()"
+  #ionContent>
+  <ion-list>
+    <div class="border-bottom border-top border-success border-1">
+      <ion-row>
+        <ion-col class="text-center">
+          <a routerLink="hr-company">
+            <img alt="人力资源公司" src="/assets/image/humanResources.png" class="img-thumbnail"/>
+          </a>
+          <p>人力资源公司</p>
+        </ion-col>
+        <ion-col class="text-center">
+          <a routerLink="communityEnterprise">
+            <img alt="社区企业" src="/assets/image/enterprise.png" class="img-thumbnail"/>
+          </a>
+          <p>社区企业</p>
+        </ion-col>
+        <ion-col class="text-center">
+          <a routerLink="communityMicroFactory">
+            <img alt="社区微工厂" src="/assets/image/factory.png" class="img-thumbnail"/>
+          </a>
+          <p>社区微工厂</p>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-item *ngFor="let job of items">
+      <ion-label routerLink="./{{job.id}}">
+        <h2>{{job.title}}</h2>
+        <p>{{job.summary}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-progress-bar type="indeterminate" reversed="true" *ngIf="loading"></ion-progress-bar>
+  </ion-list>
+</ion-content>
+

@@ -1,0 +1,13 @@
+<ng-select [formControl]="formControl"
+           [items]="items"
+           [notFoundText]='notFoundText'
+           [searchFn]="onSearch"
+           [typeToSearchText]='typeToSearchText'
+           bindValue="id">
+  <ng-template let-item="item" ng-label-tmp>
+    {{item.label}}
+  </ng-template>
+  <ng-template let-item="item" ng-option-tmp>
+    {{item.option}}
+  </ng-template>
+</ng-select>

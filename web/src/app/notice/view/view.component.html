@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-12 text-right">
+    <app-back-button></app-back-button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <app-mobile-review *ngIf="notice">
+      <h2 class="text-center">{{notice.title}}</h2>
+      <p class="text-secondary text-center">{{notice.createUser.name}} {{notice.createTime | date: 'yyyy-MM-dd'}}</p>
+      <div [innerHTML]="notice.content | safe" class="text-indent-2"></div>
+    </app-mobile-review>
+  </div>
+  <div class="col-6">
+    <div class="row">
+      <img class="img-thumbnail" style="max-height: 200px" *ngIf="imageModel" [src]="imageModel.src"
+           alt="{{imageModel.alt}}"/>
+    </div>
+  </div>
+</div>

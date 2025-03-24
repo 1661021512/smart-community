@@ -1,0 +1,8 @@
+<select class="form-control" [formControl]="selected">
+  <option *ngIf="isShowPleaseSelect" [ngValue]="null">
+    请选择
+  </option>
+  <option *ngFor="let object of objects;" [ngValue]="object.id">
+    {{object.name}}
+  </option>
+</select>

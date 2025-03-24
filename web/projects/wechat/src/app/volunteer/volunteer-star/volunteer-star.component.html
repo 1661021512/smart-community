@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-title>服务明星</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-list lines="full">
+    <ion-item *ngFor="let volunteerStar of volunteerStars">
+      <ion-avatar slot="end">
+        <img alt="user" src="/assets/image/user.png" />
+      </ion-avatar>
+      <ion-label>
+        <h3>{{volunteerStar.wechatUser.name}}</h3>
+        <p>{{volunteerStar.wechatUser.introduction}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

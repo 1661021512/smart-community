@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--是否开启debug模式(在首次配置时应该开始DEBUG模式看是否发生错误以及错误详情)-->
+<configuration debug="true">
+    <!--引入内置文件过滤器，共享该过滤器的配置-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!--    定义一个appender，起个名字为CONSOLE，对应处理的类为：ch.qos.logback.core.ConsoleAppender-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+        <!--在此基础上，添加自定义过滤器，-->
+        <filter class="club.yunzhi.smartcommunity.logger.LoggerConsoleFilter"/>
+    </appender>
+
+    <!--将debug等级及以上的日志写入控制台及文件-->
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

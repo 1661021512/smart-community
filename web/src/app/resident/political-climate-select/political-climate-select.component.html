@@ -1,0 +1,6 @@
+<select class="form-control" [formControl]="politicalClimateSelected" >
+  <option *ngIf="state.showPleaseSelect" [ngValue]="null">全部</option>
+  <option *ngFor="let politicalClimate of politicalClimates"  [ngValue]="politicalClimate.id">
+    {{politicalClimate.name}}
+  </option>
+</select>

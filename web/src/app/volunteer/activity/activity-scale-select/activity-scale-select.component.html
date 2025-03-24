@@ -1,0 +1,7 @@
+<select class="form-control" [formControl]="activityScaleSelected" >
+  <option *ngIf="state.showPleaseSelect" [ngValue]="null">全部</option>
+  <option *ngFor="let activityScale of activityScales"  [ngValue]="activityScale.id">
+    {{activityScale.name}}
+  </option>
+</select>
+

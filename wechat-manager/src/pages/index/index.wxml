@@ -1,0 +1,64 @@
+<view class="page" data-weui-theme="light">
+    <view class="weui-msg">
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__icon-area">
+                <i class="weui-icon-info weui-icon_msg"></i>
+            </view>
+            <h2 class="weui-msg__title" wx:if="{{init}}">请登录</h2>
+            <h2 class="weui-msg__title" wx:if="{{!init}}">正在登录，请稍后</h2>
+            <view class="weui-msg__desc">
+                <view>
+                    <text>我们尚未检测到您的登录信息。</text>
+                </view>
+            </view>
+            <view class="weui-msg__custom-area" wx:if="{{showHelp}}">
+                <view class="weui-cells__group weui-cells__group_form">
+                    <view class="weui-cells">
+                        <h3>系统登录需要您授权获取您的手机号码</h3>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-msg__opr-area">
+            <view class="weui-btn-area">
+                <button disabled="{{!init}}" class="weui-btn_primary" open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber">
+                    登录
+                </button>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!--以下代码可以直接查看微信UI-->
+<!--<view class="page" data-weui-theme="light" wx:if="{{init}}">-->
+<!--    <view class="userinfo">-->
+<!--        <block wx:if="{{canIUseOpenData}}">-->
+<!--            <view class="userinfo-avatar" bindtap="bindViewTap">-->
+<!--                <open-data type="userAvatarUrl"></open-data>-->
+<!--            </view>-->
+<!--            <open-data type="userNickName"></open-data>-->
+<!--        </block>-->
+<!--        <block wx:elif="{{!hasUserInfo}}">-->
+<!--            <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile">获取头像昵称</button>-->
+<!--            <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取头像昵称</button>-->
+<!--            <view wx:else>请使用1.4.4及以上版本基础库</view>-->
+<!--        </block>-->
+<!--        <block wx:else>-->
+<!--            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>-->
+<!--            <text class="userinfo-nickname">{{userInfo.nickName}}12</text>-->
+<!--        </block>-->
+<!--    </view>-->
+<!--    <view class="page__bd page__bd_spacing">-->
+<!--        <view class="weui-flex">-->
+<!--            <view class="weui-flex__item">-->
+<!--                <view class="placeholder" style="text-align:center; font-size: 18px; margin-top: 27px;">{{motto}}</view>-->
+<!--            </view>-->
+<!--        </view>-->
+<!--    </view>-->
+<!--    <view class="page__bd">-->
+<!--        <view class="button-sp-area cell">-->
+<!--            <navigator url="/example/index" class="weui-btn_cell weui-btn_cell-default">浏览 UI 模板</navigator>-->
+<!--            <navigator url="/pages/user/binding/binding" class="weui-btn_cell weui-btn_cell-default">用户绑定</navigator>-->
+<!--        </view>-->
+<!--    </view>-->
+<!--</view>-->

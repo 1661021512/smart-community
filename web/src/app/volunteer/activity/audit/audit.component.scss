@@ -1,0 +1,18 @@
+@use 'sass:math';
+// 各个表格列的宽度占比
+$widths: 10 15 10 20 20 30 40 50 30;
+
+// 计算宽度比的和
+$sum: 0;
+@each $w in $widths {
+  $sum: $sum + $w;
+}
+
+// 分别设置第1至N列的占比。
+@for $i from 1 to length($widths) {
+  $width: math.div(100 * nth($widths, $i), $sum);
+
+  table > thead > tr > th:nth-child(#{$i}) {
+    width: $width + '%'
+  }
+}

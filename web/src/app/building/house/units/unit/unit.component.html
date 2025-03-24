@@ -1,0 +1,13 @@
+<form [formGroup]="formGroup" class="form-row">
+  <div class="col-3">名称：<input [formControlName]="keys.name" appValidatorClass class="form-control" type="text"></div>
+  <div class="col-3">层数：<input [formControlName]="keys.maxFloor" appValidatorClass class="form-control" type="number">
+  </div>
+  <div class="col-3"> 每层户数：<input [formControlName]="keys.houseCountPerFloor" appValidatorClass class="form-control"
+                                  type="number"></div>
+  <div class="col-3 align-self-end">
+    <button (click)="onBatchGenerateHouses(unit)" *ngIf="!unit.id" [disabled]="formGroup.invalid"
+            class="btn btn-sm btn-primary"
+            type="button">重新生成住房
+    </button>
+  </div>
+</form>

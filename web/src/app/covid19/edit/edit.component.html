@@ -1,0 +1,19 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup)">
+  <div class="form-group">
+    <label>是否接种：</label>
+    <app-true-or-false
+      [formControlName]="formKeys.beVaccinated"></app-true-or-false>
+  </div>
+  <div class="form-group" *ngIf="formGroup.get(formKeys.beVaccinated).value">
+    <label>接种地点:</label>
+    <input type="text" class="form-control"  [formControlName]="formKeys.vaccinatedPlace">
+  </div>
+  <div class="form-group" *ngIf="!formGroup.get(formKeys.beVaccinated).value">
+    <label>未接种原因:</label>
+    <input type="text" class="form-control"  [formControlName]="formKeys.notVaccinatedReason">
+  </div>
+  <div class="form-group text-center">
+    <button type="button" (click)="onClose()" class="btn btn-danger"><i class="fa fa-times"></i>关闭</button>
+    <button type="submit" [disabled]="formGroup.invalid" class="btn btn-primary"><i class="fa fa-check"></i>确认</button>
+  </div>
+</form>

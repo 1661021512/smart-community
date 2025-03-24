@@ -1,0 +1,10 @@
+<div class="row" *ngIf="houseTypeFormControl.value === null">
+  <div class="col-3 text-right col-form-label">
+    请选择房屋类型：
+  </div>
+  <div class="col-9">
+    <app-house-type-radio [formControl]="houseTypeFormControl"></app-house-type-radio>
+  </div>
+</div>
+<app-building-type *ngIf="houseTypeFormControl.value === buildingType"></app-building-type>
+<app-bungalow-type *ngIf="houseTypeFormControl.value === bungalowType"></app-bungalow-type>

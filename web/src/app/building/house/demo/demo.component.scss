@@ -1,0 +1,21 @@
+.unit {
+  margin: 2em auto;
+  tr {
+    td {
+      background-size: contain;
+    }
+  }
+
+  tr:nth-of-type(odd) {
+    td {
+      background-image: url('/assets/building/house/block.png');
+    }
+  }
+
+  tr:nth-of-type(even) {
+    td {
+      background-image: url('/assets/building/house/block-perfect.png');
+      color: #000000;
+    }
+  }
+}

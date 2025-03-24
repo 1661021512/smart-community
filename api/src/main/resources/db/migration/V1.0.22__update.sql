@@ -1,0 +1,11 @@
+alter table district add column geo_json_id bigint;
+create table district_data_statistics (id bigint not null auto_increment, covid19defensed_count bigint not null, house_count bigint not null, party_member_count bigint not null, resident_count bigint not null, district_id bigint not null, primary key (id)) engine=InnoDB;
+create table user_data_statistics (id bigint not null auto_increment, enter_count bigint not null, building_id bigint, community_id bigint, county_id bigint, town_id bigint, user_id bigint not null, village_id bigint, primary key (id)) engine=InnoDB;
+alter table district add constraint FKmjx42b1117mc9mpbhe65a6xgq foreign key (geo_json_id) references attachment (id);
+alter table district_data_statistics add constraint FKpb65atvy78o98x4dg5pwjwomn foreign key (district_id) references district (id);
+alter table user_data_statistics add constraint FKngs0kek9yn2obcglxhvnlm6jd foreign key (building_id) references district (id);
+alter table user_data_statistics add constraint FKkxh5br3bgjhrc51dscwdohog8 foreign key (community_id) references district (id);
+alter table user_data_statistics add constraint FKkh7g177tumyaw39ffr0q3wgyp foreign key (county_id) references district (id);
+alter table user_data_statistics add constraint FK6m410peudp5m15tscs2plpwc6 foreign key (town_id) references district (id);
+alter table user_data_statistics add constraint FKhilyejqcrpo7a9r1daatv70vl foreign key (user_id) references user (id);
+alter table user_data_statistics add constraint FKle2a0mw2qo361cgivaddj6hs1 foreign key (village_id) references district (id);

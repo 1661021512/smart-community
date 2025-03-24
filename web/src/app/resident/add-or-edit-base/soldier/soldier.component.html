@@ -1,0 +1,32 @@
+<form [formGroup]="formGroup">
+  <table class="table table-bordered">
+    <tr>
+      <td>是否复转军人</td>
+      <td colspan="3">
+        <app-true-or-false [formControlName]="formKeys.beSoldier"></app-true-or-false>
+      </td>
+    </tr>
+    <ng-container *ngIf="formGroup.get(formKeys.beSoldier).value">
+      <tr>
+        <td>是否参战</td>
+        <td>
+          <app-true-or-false [formControlName]="formKeys.beEnterToWar"></app-true-or-false>
+        </td>
+        <td>是否志愿兵</td>
+        <td>
+          <app-true-or-false [formControlName]="formKeys.beVolunteer"></app-true-or-false>
+        </td>
+      </tr>
+      <tr>
+        <td>是否涉核</td>
+        <td>
+          <app-true-or-false [formControlName]="formKeys.beNuclear"></app-true-or-false>
+        </td>
+        <td>是否残疾</td>
+        <td>
+          <app-true-or-false [formControlName]="formKeys.beDisabledSolider"></app-true-or-false>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</form>

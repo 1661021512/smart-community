@@ -1,0 +1,31 @@
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {VehicleAddComponent} from './vehicle-add.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {ResidentShareModule} from '../../resident/resident-share.module';
+import {
+  VehicleBrandAutoCompleteModule
+} from '../../system/vehicle-brand/vehicle-brand-auto-complete/vehicle-brand-auto-complete.module';
+import {VehicleTypeSelectModule} from '../../system/vehicle-type/vehicle-type-select/vehicle-type-select.module';
+import {VehicleColourSelectModule} from '../vehicle-colour-select/vehicle-colour-select.module';
+import {YzStatusRadioModule} from '../../share/yz-status/yz-status-radio/yz-status-radio.module';
+/**
+ * 车辆新增
+ */
+
+@NgModule({
+  declarations: [VehicleAddComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ResidentShareModule,
+    VehicleBrandAutoCompleteModule,
+    VehicleTypeSelectModule,
+    VehicleColourSelectModule,
+    YzStatusRadioModule
+  ],
+  exports: [
+    VehicleAddComponent
+  ]
+})
+export class VehicleAddModule { }

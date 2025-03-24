@@ -1,0 +1,66 @@
+<form (submit)="onQuery()" [formGroup]="formGroup">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>片区</label>
+      <app-village-select [houseType]="houseType" [clearable]="false" [formControlName]="formKeys.villageId"></app-village-select>
+    </div>
+    <div class="form-group text-right align-self-end">
+      <button class="btn btn-info" type="submit">
+        <i class="fas fa-search"></i>查询
+      </button>
+    </div>
+  </div>
+</form>
+<yz-size (changeSize)="onSizeChange($event)" [size]="pageData.size"></yz-size>
+<div class="row mb-2">
+  <div class="col-12 text-right">
+    <a class="btn btn-primary" routerLink="./add"><i class="fas fa-plus"></i>新增</a>
+  </div>
+</div>
+
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>名称</th>
+    <th>片区</th>
+    <th>水平偏移</th>
+    <th>垂直偏移</th>
+    <th>户数</th>
+    <th class="text-right">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let object of pageData.content; index as i">
+    <td>{{pageData.size * pageData.number + i + 1}}</td>
+    <td>{{object.name}}</td>
+    <td>{{object.village.name}}</td>
+    <td>{{object.horizontalOffset}}</td>
+    <td>{{object.verticalOffset}}</td>
+    <td>{{object.unitCount}}</td>
+    <td class="text-right">
+      <a *ngIf="object.units.length !== 0" class="btn btn-primary btn-sm"
+         routerLink="./view-2d/{{object.id}}">
+        <i class="fas fa-user-friends"></i>查看居民
+      </a>
+      <a *ngIf="object.units.length === 0" class="btn btn-outline-primary btn-sm"
+         routerLink="./house/{{object.id}}">
+        <i class="fas fa-eye"></i>
+        生成住房
+      </a>
+      <a class="btn btn-outline-primary btn-sm" routerLink="./edit/{{object.id}}">
+        <i class="fas fa-pen"></i>
+        编辑
+      </a>
+      <span (click)="onDelete(object, i)" class="btn btn-outline-danger btn-sm">
+        <i class="fas fa-trash-alt"></i>
+        删除
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<yz-page (changePage)="onPageChange($event)"
+         [page]="pageData.number"
+         [size]="pageData.size"
+         [totalElements]="pageData.totalElements"></yz-page>

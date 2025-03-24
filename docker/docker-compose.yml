@@ -1,0 +1,74 @@
+# 版本号
+version: '3'
+
+# 定义服务
+services:
+  instrument.java1.8:
+    build:
+      context: ./jdk8
+    image: java1.8
+    volumes:
+      - ./app/api:/usr/src/myapp
+    depends_on:
+      - instrument.mysql57
+    links:
+      - instrument.mysql57
+    networks:
+      instrumentNetwork:
+        ipv4_address: 172.28.6.2
+    # -i
+    stdin_open: true
+    # -t
+    tty: true
+    command: java -jar resource-1.1-exec.jar --active=pro
+
+  instrument.mysql57:
+    build:
+      context: ./mysql57
+    image: mysql:5.7
+    volumes:
+      - ./mysql57/custom.cnf:/etc/mysql/conf.d/custom.cnf
+    ports:
+      - "3309:3306"
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=measurement
+    networks:
+      instrumentNetwork:
+        ipv4_address: 172.28.6.4
+
+  instrument.nginx:
+    build:
+      context: ./nginx
+    image: nginx:1.13.12
+    depends_on:
+      - instrument.java1.8
+    links:
+      - instrument.java1.8
+    volumes:
+      - ./:/etc/nginx/conf.d
+      - ./app:/usr/local/app
+    ports:
+      - "9000:80"
+      - "9001:81"
+    networks:
+      instrumentNetwork:
+        ipv4_address: 172.28.6.3
+
+  instrument.redis:
+    build:
+      context: ./redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      instrumentNetwork:
+        ipv4_address: 172.28.6.5
+
+networks:
+  instrumentNetwork:
+    ipam:
+      config:
+        - subnet: 172.28.6.0/24

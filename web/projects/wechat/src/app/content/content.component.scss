@@ -1,0 +1,5 @@
+wechat-content-detail {
+  // 不显示selector，避免破坏dom结构，从而影响显示效果
+  // https://stackoverflow.com/questions/38287224/angular-2-component-without-selector-tag-in-dom
+  display: contents;
+}

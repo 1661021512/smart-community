@@ -1,0 +1,20 @@
+<view class="page" data-weui-theme="light">
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></view>
+        <view class="weui-msg__text-area">
+            <h2 class="weui-msg__title">操作失败</h2>
+            <view class="weui-msg__desc">对不起，系统未检测到您当前绑定在微信中的手机号拥有系统使用权限。</view>
+        </view>
+        <view class="weui-msg__tips-area">
+            <view class="weui-msg__tips">问题反馈：13920618851(请备注：系统 BUG 反馈)</view>
+        </view>
+        <view class="weui-msg__extra-area">
+            <view class="weui-footer">
+                <view class="weui-footer__links">
+                    <text class="weui-footer__link">版权所有</text>
+                </view>
+                <view class="weui-footer__text">©{{year}}尚义县人民政府</view>
+            </view>
+        </view>
+    </view>
+</view>

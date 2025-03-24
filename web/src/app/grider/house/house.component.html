@@ -1,0 +1,97 @@
+<form (submit)="onSubmit(queryForm)" [formGroup]="queryForm" class="form-group">
+  <div class="form-row justify-content-between">
+    <div class="form-group col-2">
+      <label>户主姓名</label>
+      <input class="form-control" [formControlName]="keys.owner" type="text">
+    </div>
+    <div class="form-group col-3">
+      <label>小区</label>
+      <app-village-select [formControlName]="keys.villageId"></app-village-select>
+    </div>
+    <div class="form-group col-2">
+      <label>楼</label>
+      <app-building-select [villageId]="queryForm.get(keys.villageId).value"  formControlName="buildingId"></app-building-select>
+    </div>
+    <div class="form-group col-2">
+      <label>单元</label>
+      <app-unit-select  [buildingId]="queryForm.get(keys.buildingId).value" [formControlName]="keys.unitId"></app-unit-select>
+    </div>
+    <div class="col form-group">
+      <label>使用性质</label>
+      <app-house-own-type-radio [formControlName]="keys.houseType"></app-house-own-type-radio>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col align-self-end text-right">
+      <div class="form-text">
+        <button class="btn btn-warning" type="reset">
+          <i class="fas fa-redo"></i>重置
+        </button>
+        <button class="btn btn-info" type="submit">
+          <i class="fas fa-search"></i>查询
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<hr>
+<yz-size (changeSize)="onSizeChange($event)" [size]="pageData.size"></yz-size>
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>户主</th>
+    <th>户主电话</th>
+    <th>地址</th>
+    <th>面积</th>
+    <th>保障性住房</th>
+    <th>房屋补贴</th>
+    <th>居住人员</th>
+    <th>入住日期</th>
+    <th>使用性质</th>
+    <th>备注</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let house of pageData.content; index as i">
+    <td>{{ pageData.size * pageData.number + i + 1 }}</td>
+    <td>{{ house.owner?.name }}</td>
+    <td>{{ house.owner?.phone }}</td>
+    <td>{{ house | housePlace | async}}
+    <td>{{ house.area }}</td>
+    <td [innerHTML]="house.lowIncoming | trueOrFalse" ></td>
+    <td [innerHTML]="house.relief | trueOrFalse" ></td>
+    <td>
+      <label *ngFor="let resident of house.residents; index as i">
+        <ng-container *ngIf="resident.name !== house.owner?.name">
+          {{resident.name}}&nbsp;&nbsp;
+        </ng-container>
+      </label>
+    </td>
+    <td>{{ house.checkInTime | date : 'yyyy-MM-dd'}}</td>
+    <td [innerHTML]="house.type | owned"></td>
+    <td>{{house.remarks}}</td>
+    <td>
+      <a class="btn btn-outline-info btn-sm" routerLink="addResident/{{house.id}}">
+        <i class="fas fa-plus"></i>添加居民
+      </a>
+      <span class="btn btn-outline-primary btn-sm" routerLink="detail/{{house.id}}">
+            <i class="fas fa-eye"></i>查看
+          </span>
+      <span class="btn btn-outline-primary btn-sm" routerLink="edit/{{house.id}}">
+        <i class="fas fa-pen"></i>编辑
+      </span>
+<!--      <span (click)="onRemove(house.id, i)" class="btn btn-outline-danger btn-sm">-->
+<!--        <i class="fas fa-trash-alt"></i>删除-->
+<!--      </span>-->
+    </td>
+  </tr>
+  </tbody>
+</table>
+<yz-page (changePage)="onPageChange($event)"
+         [page]="pageData.number"
+         [size]="pageData.size"
+         [totalElements]="pageData.totalElements"></yz-page>
+

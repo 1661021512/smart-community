@@ -1,0 +1,22 @@
+<form [formGroup]="formGroup">
+  <table class="table table-bordered">
+    <tr>
+      <td>是否在校生</td>
+      <td>
+        <app-true-or-false [formControlName]="formKeys.beStudent"></app-true-or-false>
+      </td>
+    </tr>
+    <ng-container *ngIf="formGroup.get(formKeys.beStudent).value">
+      <tr>
+        <td>学校名称<code>*</code></td>
+        <td>
+          <input [formControlName]="formKeys.school" appValidatorClass class="form-control" type="text">
+        </td>
+        <td>学校地址</td>
+        <td>
+          <input [formControlName]="formKeys.schoolAddress" class="form-control" type="text">
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</form>

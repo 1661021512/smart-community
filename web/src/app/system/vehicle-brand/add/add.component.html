@@ -1,0 +1,17 @@
+<form class="container-sm" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup)">
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right">品牌名称<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.name" class="form-control" id="name" name="name" type="text">
+      <small class="text-danger" *ngIf="formGroup.get(formKeys.name).invalid">
+        <span *ngIf="formGroup.get(formKeys.name).errors.vehicleBrandNameExist">该车辆品牌名称已经存在</span>
+      </small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-10 offset-2">
+      <button [disabled]="formGroup.invalid || formGroup.status === 'PENDING'" class="btn btn-primary" type="submit"><i class="far fa-save"></i>保存
+      </button>
+    </div>
+  </div>
+</form>

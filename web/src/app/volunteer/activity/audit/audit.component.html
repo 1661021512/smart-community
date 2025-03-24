@@ -1,0 +1,42 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>出生日期</th>
+    <th>文化程度</th>
+    <th>电话</th>
+    <th>联系地址</th>
+    <th>个人介绍</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let signUp of signUps; index as index">
+    <td>{{index + 1}}</td>
+    <td>{{signUp.volunteer.wechatUser.name}}</td>
+    <td [innerHTML]="signUp.volunteer.wechatUser.sex | sex"></td>
+    <td>{{signUp.volunteer.wechatUser.birthday | intDateToTimestamp | date: 'yyyy-MM-dd'}}</td>
+    <td [innerHTML]="signUp.volunteer.wechatUser.education | education"></td>
+    <td>{{signUp.volunteer.phone}}</td>
+    <td>{{signUp.volunteer.wechatUser.address}}</td>
+    <td>{{signUp.volunteer.wechatUser.introduction}}</td>
+    <td>
+      <span *ngIf="signUp.status === 0">未审核</span>
+      <span *ngIf="signUp.status === 1">已通过</span>
+      <span *ngIf="signUp.status === 2">已拒绝</span>
+    </td>
+    <td>
+      <button class="btn btn-sm btn-outline-primary" type="button"
+              *ngIf="showApprovedButton(signUp)"
+              (click)="onApproved(signUp)">
+        <i class="fa fa-check"></i>通过</button>
+      <button class="btn btn-sm btn-outline-danger" type="button"
+              *ngIf="showRefuseButton(signUp)"
+              (click)="onRefuse(signUp)"><i class="fa fa-times-circle"></i>拒绝</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

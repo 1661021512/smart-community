@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup" class="container-sm">
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label text-right" for="name">名称<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.name" appValidatorClass class="form-control" id="name" name="name" type="text">
+      <small class="text-danger" *ngIf="formGroup.get(formKeys.name).invalid">
+        <span *ngIf="formGroup.get(formKeys.name).errors.townNameExist">乡镇名称已存在</span>
+      </small>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right" for="pinyin">拼音<code>*</code></label>
+    <div class="col-sm-10">
+      <input [formControlName]="formKeys.pinyin" appValidatorClass class="form-control" id="pinyin" name="pinyin"
+             type="text">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right" for="pinyin">GEOJSON地图<code>*</code></label>
+    <div class="col-sm-10">
+      <app-uploader accept=".json" [formControlName]="formKeys.geoJson"></app-uploader>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label  text-right" for="pinyin">GEOJSON辅助地图</label>
+    <div class="col-sm-10">
+      <app-uploader accept=".json" [formControlName]="formKeys.secondaryGeoJson"></app-uploader>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-sm-10 offset-2">
+      <button [disabled]="formGroup.invalid" class="btn btn-primary" type="submit"><i class="fas fa-save"></i>保存
+      </button>
+    </div>
+  </div>
+</form>

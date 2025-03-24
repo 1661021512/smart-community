@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-4">
+    <form class="form-group" (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup">
+      <div class="form-row">
+        <div class="col-3 text-right">
+          主地图：
+        </div>
+        <div class="col-9">
+          <app-uploader accept=".json" [formControl]="countryGeoMapFormControl"></app-uploader>
+        </div>
+      </div>
+      <div class="form-row mt-2">
+        <div class="col-3 text-right">
+          副地图：
+        </div>
+        <div class="col-9">
+          <app-uploader accept=".json" [formControl]="countySecondaryMapFormControl"></app-uploader>
+        </div>
+      </div>
+      <div class="form-row mt-2">
+        <div class="col-3 text-right">
+        </div>
+        <div class="col-9">
+         <button class="btn btn-primary" [disabled]="formGroup.invalid"><i class="fa fa-save"></i> 保存</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

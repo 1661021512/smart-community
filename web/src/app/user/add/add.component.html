@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup" class="container-sm">
+  <div class=" row">
+    <label class="col-3 text-right col-form-label" for="name">姓名<code>*</code></label>
+    <div class="col-7">
+      <input [formControlName]="keys.name" appValidatorClass class="form-control" id="name" type="text">
+    </div>
+  </div>
+  <div class=" row">
+    <label class="col-3 text-right col-form-label" for="username">手机号<code>*</code></label>
+    <div class="col-7">
+      <input [formControlName]="keys.username" appValidatorClass class="form-control" id="username" type="text">
+      <small class="text-danger" *ngIf="formGroup.get('username').invalid">
+        <span *ngIf="formGroup.get('username').errors.usernameExist">手机号码已经存在</span>
+      </small>
+    </div>
+  </div>
+  <div class="row  ">
+    <label class="col-3 text-right col-form-label">角色:<code>*</code></label>
+    <div class="col-7">
+      <app-role-checkbox [formControlName]="keys.roles"></app-role-checkbox>
+      <br>
+      <small *ngIf="formGroup.get(keys.roles)!.invalid"
+             class="text-danger">
+        最少选择一个角色
+      </small>
+    </div>
+  </div>
+  <div class="row  ">
+    <label class="col-3 text-right col-form-label">区域<code>*</code></label>
+    <div class="col-7">
+      <app-region-select-of-current-user
+        [formControlName]="keys.districtId"
+        [endDistrictType]="districtCommunityType"
+      ></app-region-select-of-current-user>
+    </div>
+  </div>
+  <div class=" row">
+    <div class="col-10 offset-5">
+      <button [disabled]="formGroup.invalid" class="btn btn-primary"><i class="far fa-save"></i>保存</button>
+    </div>
+  </div>
+</form>
+

@@ -1,0 +1,123 @@
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label>小区名称</label>
+      <select class="form-control">
+        <option>紫竹苑</option>
+        <option>东方明珠</option>
+        <option>西城华府</option>
+        <option>丽水湾</option>
+        <option>石上流名苑</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label>物业名称</label>
+      <select class="form-control">
+        <option>AA物业</option>
+        <option>BB物业</option>
+        <option>CC物业</option>
+        <option>DD物业</option>
+        <option>EE物业</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2"></div>
+    <div class="form-group col-md-4" style="margin-top: 30px">
+        <input type="radio" id="1">&nbsp;<label name="1"><span class='badge badge-pill badge-primary'>全部</span>&nbsp;&nbsp;</label>
+        <input type="radio" id="2">&nbsp;<label name="2"><span class='badge badge-pill badge-info'>已处理</span>&nbsp;&nbsp;</label>
+        <input type="radio" id="3">&nbsp;<label name="3"><span class='badge badge-pill badge-danger'>未处理</span>&nbsp;&nbsp;</label>
+        <input type="radio" id="4">&nbsp;<label name="4"><span class='badge badge-pill badge-warning'>处理中</span></label>
+    </div>
+  </div>
+</form>
+
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>小区名称</th>
+    <th>物业名称</th>
+    <th>报修日期</th>
+    <th>计划完成日期</th>
+    <th>报信状态</th>
+    <th>负责人</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>1</td>
+    <td>紫竹苑</td>
+    <td>AA物业</td>
+    <td>2014-5-20</td>
+    <td>2019-6-20</td>
+    <td><span class='badge badge-pill badge-warning'>处理中</span></td>
+    <td>秦明</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm" routerLink="view/1">
+        <i class="fas fa-eye"></i>
+        查看
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>东方明珠</td>
+    <td>AA物业</td>
+    <td>2014-5-20</td>
+    <td>2019-6-20</td>
+    <td><span class='badge badge-pill badge-info'>已处理</span></td>
+    <td>张三</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm" routerLink="view/1">
+        <i class="fas fa-eye"></i>
+        查看
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>西城华府</td>
+    <td>AA物业</td>
+    <td>2014-5-20</td>
+    <td>2019-6-20</td>
+    <td><span class='badge badge-pill badge-warning'>处理中</span></td>
+    <td>高名</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm" routerLink="view/1">
+        <i class="fas fa-eye"></i>
+        查看
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>丽水湾</td>
+    <td>AA物业</td>
+    <td>2014-5-20</td>
+    <td>2019-6-20</td>
+    <td><span class='badge badge-pill badge-danger'>未处理</span></td>
+    <td>王五</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm" routerLink="view/1">
+        <i class="fas fa-eye"></i>
+        查看
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>紫竹苑</td>
+    <td>AA物业</td>
+    <td>2014-5-20</td>
+    <td>2019-6-20</td>
+    <td><span class='badge badge-pill badge-info'>已处理</span></td>
+    <td>李四</td>
+    <td>
+      <span class="btn btn-outline-primary btn-sm" routerLink="view/1">
+        <i class="fas fa-eye"></i>
+        查看
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>

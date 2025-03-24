@@ -1,0 +1,243 @@
+<div class="row mb-2">
+  <div class="col-6">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="showRelationship = !showRelationship"><i class="fas fa-dharmachakra"></i>查看关系图
+    </button>
+  </div>
+  <div class="col-6 text-right">
+    <app-back-button></app-back-button>
+  </div>
+</div>
+<div class="row mb-2" *ngIf="showRelationship && resident">
+  <div class="col-12">
+    <app-relationship-map [residentId]="resident.id"
+    (beResidentIdChange)="onResidentIdChange($event)"></app-relationship-map>
+  </div>
+</div>
+<table *ngIf="resident" class="table table-bordered">
+  <tbody>
+  <tr>
+    <td>姓名</td>
+    <td>{{resident.name}}</td>
+    <td>性别</td>
+    <td [innerHTML]="resident.idNumber | idSex | sex"></td>
+  </tr>
+  <tr>
+    <td>年龄</td>
+    <td>{{resident.idNumber | idAge}}</td>
+    <td>身份证号码</td>
+    <td>{{resident.idNumber}}</td>
+  </tr>
+  <tr>
+    <td>民族</td>
+    <td>{{resident.nationality | nationality}}</td>
+    <td>手机号</td>
+    <td>{{resident.phone}}</td>
+  </tr>
+  <tr>
+    <td>文化程度</td>
+    <td [innerHTML]="resident.education | education"></td>
+    <td>现住址</td>
+    <td><p *ngFor="let house of resident.houses">{{house | housePlace | async}}</p></td>
+  </tr>
+  <tr>
+    <td>户编号</td>
+    <td>{{resident.accountNumber}}</td>
+    <td>政治面貌</td>
+    <td [innerHTML]="resident.politicalClimate | politicalClimate">
+    </td>
+  </tr>
+  <tr>
+    <td>工作单位</td>
+    <td>
+      {{resident.enterprise?.name}}
+    </td>
+    <td>宗教信仰</td>
+    <td>
+      {{resident.religiousBelief?.name}}
+    </td>
+  </tr>
+  <tr>
+    <td>婚姻状况:</td>
+    <td [innerHTML]="resident.maritalStatus | marital">
+    </td>
+    <td>流动人口</td>
+    <td [innerHTML]="resident.beFloating | trueOrFalse"></td>
+  </tr>
+  <tr *ngIf="resident.beFloating">
+    <td>流出/流入时间</td>
+    <td>
+      {{resident.floatedDate | date: 'yyyy-MM-dd'}}
+    </td>
+    <td>流出/流入地址</td>
+    <td>
+      {{resident.floatedPlace}}
+    </td>
+  <tr>
+  <tr>
+    <td>本户籍地</td>
+    <td [innerHTML]="resident.localDomicile | trueOrFalse"></td>
+    <td>户籍所在地</td>
+    <td>
+      {{resident.domicilePlace}}
+    </td>
+  </tr>
+  <tr>
+    <td>是否低保</td>
+    <td [innerHTML]="resident.beSubsistenceAllowances | trueOrFalse"></td>
+    <td>是否残疾</td>
+    <td [innerHTML]="resident.beDisabled | trueOrFalse">
+  </tr>
+  <tr>
+    <td>是否医保</td>
+    <td [innerHTML]="resident.beMedicalInsurance | trueOrFalse"></td>
+    <td>是否养老保险</td>
+    <td [innerHTML]="resident.beEndowmentInsurance | trueOrFalse"></td>
+  </tr>
+  <tr>
+    <td>是否高龄补贴</td>
+    <td [innerHTML]="resident.beOldAgeAllowance | trueOrFalse"></td>
+    <td>是否空巢</td>
+    <td [innerHTML]="resident.beEmptyNest | trueOrFalse"></td>
+  </tr>
+  <tr>
+    <td>是否孤寡</td>
+    <td [innerHTML]="resident.beLonelyOrWidowed | trueOrFalse"></td>
+    <td>是否留守儿童</td>
+    <td [innerHTML]="resident.beLeftBehindChildren | trueOrFalse"></td>
+  </tr>
+  <tr>
+    <td>就业情况</td>
+    <td>
+      <ng-container *ngIf="resident.employmentStatus === 0">
+        失业
+      </ng-container>
+      <ng-container *ngIf="resident.employmentStatus === 1">
+        就业
+      </ng-container>
+      <ng-container *ngIf="resident.employmentStatus === 2">
+        退休
+      </ng-container>
+    </td>
+    <td>求职意向</td>
+    <td>
+      <p *ngFor="let jobType of resident.jobTypeRequirements">
+        {{jobType.name}}
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>务工地点</td>
+    <td>
+      {{resident.workPlace}}
+    </td>
+    <td>特长</td>
+    <td>
+      <p *ngFor="let skill of resident.skills">
+        {{skill.name}}
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>在校生</td>
+    <td colspan="3" [innerHTML]="resident.beStudent | trueOrFalse"></td>
+  </tr>
+  <tr *ngIf="resident.beStudent">
+    <td>学校名称</td>
+    <td>
+      {{resident.school}}
+    </td>
+    <td>学校地址</td>
+    <td>
+      {{resident.schoolAddress}}
+    </td>
+  </tr>
+  <tr>
+    <td>是否有慢性病</td>
+    <td colspan="3" [innerHTML]="resident.beChronicDisease | trueOrFalse"></td>
+  </tr>
+  <tr *ngIf="resident.beChronicDisease">
+    <td>疾病描述</td>
+    <td colspan="3">
+      {{resident.chronicDiseaseDetails}}
+    </td>
+  </tr>
+
+  <tr>
+    <td>是否复转军人</td>
+    <td colspan="3" [innerHTML]="resident.beSoldier | trueOrFalse"></td>
+  </tr>
+  <ng-container *ngIf="resident.beSoldier">
+    <tr>
+      <td>是否参战</td>
+      <td [innerHTML]="resident.beEnterToWar | trueOrFalse"></td>
+      <td>是否志愿兵</td>
+      <td [innerHTML]="resident.beVolunteer | trueOrFalse"></td>
+    </tr>
+    <tr>
+      <td>是否涉核</td>
+      <td [innerHTML]="resident.beNuclear | trueOrFalse"></td>
+      <td>是否残疾</td>
+      <td [innerHTML]="resident.beDisabledSolider | trueOrFalse"></td>
+    </tr>
+  </ng-container>
+  <tr>
+    <td>是否接种疫苗</td>
+    <td *ngIf="resident.beVaccinated !== null" [innerHTML]="resident.beVaccinated | trueOrFalse"></td>
+    <td *ngIf="resident.beVaccinated === true">接种地点</td>
+    <td *ngIf="resident.beVaccinated === true">{{resident.vaccinatedPlace}}</td>
+    <td *ngIf="resident.beVaccinated === false">原因</td>
+    <td *ngIf="resident.beVaccinated === false">{{resident.notVaccinatedReason}}</td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan="3">
+      {{resident.remarks}}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <button (click)="showMore = !showMore" class="btn btn-block btn-outline-warning" type="button">显示更多信息</button>
+    </td>
+  </tr>
+  <ng-container *ngIf="showMore">
+    <tr>
+      <td>信访</td>
+      <td colspan="3" [innerHTML]="resident.beLetterImitationPeople | trueOrFalse">
+      </td>
+    </tr>
+    <tr *ngIf="resident.beLetterImitationPeople">
+      <td>信仿内容</td>
+      <td colspan="3">{{resident.letterImitationContent}}</td>
+    </tr>
+    <tr>
+      <td>参加邪教组织</td>
+      <td colspan="3" [innerHTML]="resident.beCultMember | trueOrFalse">
+      </td>
+    </tr>
+    <tr *ngIf="resident.beCultMember">
+      <td>邪教组织名称</td>
+      <td colspan="3">{{resident.cult.name}}</td>
+    </tr>
+    <tr>
+      <td>
+        矫正人员
+      </td>
+      <td colspan="3" [innerHTML]="resident.beCrimed | trueOrFalse">
+      </td>
+    </tr>
+    <tr *ngIf="resident.beCrimed">
+      <td>
+        矫正类型
+      </td>
+      <td colspan="3">
+        <p *ngFor="let crimedType of resident.crimedTypes">
+          {{crimedType.name}}
+        </p>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

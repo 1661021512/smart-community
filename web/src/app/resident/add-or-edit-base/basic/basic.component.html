@@ -1,0 +1,111 @@
+<form [formGroup]="formGroup">
+  <table class="table table-bordered">
+    <tbody>
+    <tr>
+      <td>
+        身份证号码<code>*</code>
+      </td>
+      <td>
+        <input *ngIf="!resident.id" [formControlName]="formKeys.idNumber"
+               appValidatorClass
+               class="form-control"
+               placeholder="身份证号码" type="text">
+        <span *ngIf="resident.id">{{formGroup.get(formKeys.idNumber).value}}</span>
+      </td>
+      <td>姓名<code>*</code></td>
+      <td><input [formControlName]="formKeys.name"
+                 appValidatorClass
+                 class="form-control" placeholder="姓名" type="text">
+      </td>
+    </tr>
+
+    <tr *ngIf="house">
+      <td>户主<code>*</code></td>
+      <td>
+        <app-true-or-false [formControlName]="formKeys.isOwner" class="form-control border-0"></app-true-or-false>
+      </td>
+      <ng-container *ngIf="showRelationship(formGroup.get(formKeys.isOwner).value, house.owner, resident.id)">
+        <td>与户主关系</td>
+        <td>
+          <app-relationship-select #relationshipSelect
+                                   [formControlName]="formKeys.relationshipId"></app-relationship-select>
+        </td>
+      </ng-container>
+    </tr>
+
+    <tr>
+      <td>户编号<code>*</code></td>
+      <td><input [formControlName]="formKeys.accountNumber"
+                 appValidatorClass
+                 class="form-control" type="text">
+      </td>
+      <td>手机号码<code>*</code></td>
+      <td><input [formControlName]="formKeys.phone"
+                 appValidatorClass
+                 class="form-control" placeholder="手机号码" type="text">
+      </td>
+    </tr>
+
+    <tr>
+      <td>民族<code>*</code></td>
+      <td>
+        <app-nationality-select [formControlName]="formKeys.nationality"></app-nationality-select>
+      </td>
+      <td> 文化程度<code>*</code>
+      </td>
+      <td>
+        <app-education-select [formControlName]="formKeys.education"
+                              [isShowPleaseSelect]="false"></app-education-select>
+      </td>
+    </tr>
+    <tr>
+      <td> 政治面貌<code>*</code>
+      </td>
+      <td>
+        <app-political-climate-select [formControlName]="formKeys.politicalClimate"
+                                      [isShowPleaseSelect]="false"></app-political-climate-select>
+      </td>
+      <td> 婚姻状况<code>*</code>
+      </td>
+      <td>
+        <app-marital-status-select [formControlName]="formKeys.maritalStatus"></app-marital-status-select>
+      </td>
+    </tr>
+    <tr>
+      <td>本地户籍<code>*</code></td>
+      <td>
+        <app-true-or-false [formControlName]="formKeys.localDomicile" class="form-control border-0"></app-true-or-false>
+      </td>
+      <td>户籍所在地</td>
+      <td><input [formControlName]="formKeys.domicilePlace" class="form-control" type="text">
+      </td>
+    </tr>
+
+    <tr>
+      <td>流动人口<code>*</code></td>
+      <td>
+        <app-true-or-false [formControlName]="formKeys.beFloating" class="form-control border-0"></app-true-or-false>
+      </td>
+    </tr>
+    <tr *ngIf="formGroup.get(formKeys.beFloating).value">
+      <td>流出/流入时间<code>*</code></td>
+      <td>
+        <yz-date [formControlName]="formKeys.floatedDate">
+        </yz-date>
+      </td>
+      <td>流出/流入地址<code>*</code></td>
+      <td><input [formControlName]="formKeys.floatedPlace"
+                 appValidatorClass
+                 class="form-control" type="text">
+      </td>
+    </tr>
+    <tr>
+      <td>备注</td>
+      <td colspan="3">
+        <input [formControlName]="formKeys.remarks" class="form-control" type="text">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</form>
+

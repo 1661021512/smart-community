@@ -1,0 +1,102 @@
+
+# 设置步骤（步骤间串行）
+stages:         
+  - unit-test
+  - notify
+  - done
+
+# 设置全局变量
+variables:
+  token: c4e754196c3ed2ce02bd976893245131cb02acffee1cbb1d262ce9c0af1610c7
+  header: 'Content-Type: application/json'
+  message: '{"msgtype": "markdown","markdown": {"title": "Build %s", "text":"Build %s"}}'
+  status: 'success'
+  # 这个变量不对，目的是记录单元测试开始的时间，请查询相应的bash
+  startDate: $(git_timestamp)
+
+# 设置自动执行的管道名称
+angular-test:
+  # 设置该管道属于的步骤，同步骤的管道并行执行
+  stage: unit-test
+  # 前台使用ubuntu来构建
+  tags:
+    - ubuntu
+  # 执行的脚本
+  script:
+    - echo "angular"
+    # 模拟发生了错误
+    # - exit 0
+    # 以下步骤暂时注释，待机器人通知完成启用
+    - whoami
+    - echo $SHELL
+    - export NVM_DIR="$HOME/.nvm"
+    - echo $NVM_DIR
+    - . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"
+    - . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"
+    - env 
+    - nvm use 12.18.4
+    - node -v
+    - npm -v
+    - cd web
+    - rm package-lock.json
+    - npm install
+    - node_modules/@angular/cli/bin/ng --version
+    - node_modules/@angular/cli/bin/ng lint
+    - node_modules/@angular/cli/bin/ng test --watch=false --browsers=ChromeHeadless --sourceMap=false
+    - node_modules/@angular/cli/bin/ng build
+  # after_script:
+  # 整体执行完后，上传单元测试的重要文件（未启用） 
+  artifacts:
+    reports:
+      dotenv: build.env   
+
+
+spring-boot-test:
+  stage: unit-test
+  tags:
+    - freebsd-jdk8
+  script:
+    - echo "spring boot"
+    # 模拟未发生任务错误
+    - whoami
+    - echo $SHELL
+    - env 
+    - cd api
+    - MAVEN_OPTS=-Dorg.slf4j.simpleLogger.defaultLogLevel=info mvn install
+
+dingding-error:
+  stage: notify
+  tags: ubuntu
+  variables:
+    status: "failure"
+    content: "[${CI_PROJECT_NAME}](${CI_PROJECT_URL})中[PipeLine${CI_PIPELINE_ID}]($CI_PIPELINE_URL)运行失败，提交者：${GITLAB_USER_LOGIN}，运行耗时:"
+    title: "failure"
+    message: String.format(message, status, content)
+  script:
+    - env
+    - echo "on_failure"
+    - sh send-ding.sh -a ${token} -t markdown -T ${title} -c ${content} -M ${CI_PIPELINE_CREATED_AT}
+    - exit 1
+
+    # 在这开始调用ding.sh（未创建），发送失败提醒
+  when: on_failure
+
+dingding-success:
+  stage: notify
+  tags: ubuntu
+  variables:
+    status: "success"
+    content: "[${CI_PROJECT_NAME}](${CI_PROJECT_URL})中[PipeLine${CI_PIPELINE_ID}]($CI_PIPELINE_URL)运行成功，提交者：${GITLAB_USER_LOGIN}，运行耗时:"
+    title: "failure"
+    message: String.format(message, status, content)
+  script:
+    - env 
+    - echo "success"
+    # 在这开始调用ding.sh（未创建），发送成功提醒
+    - sh send-ding.sh -a ${token} -t markdown -T ${title} -c ${content} -M ${CI_PIPELINE_CREATED_AT}
+
+done:
+  stage: done
+  script: 
+    - env
+   

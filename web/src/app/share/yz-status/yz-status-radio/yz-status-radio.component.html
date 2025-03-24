@@ -1,0 +1,21 @@
+<div class="form-text">
+  <div *ngIf="isShowPleaseSelect" class="form-check form-check-inline">
+    <input class="form-check-input ml-1" id="{{id}}_all"
+           [formControl]="formControl"
+           [value]="null"
+           name="inlineRadioOptions" type="radio">
+    <label class="form-check-label" for="{{id}}_all">
+      <span class='badge badge-pill badge-light'>全部</span>
+    </label>
+  </div>
+  <div *ngFor="let status of statuses; index as i" class="form-check form-check-inline">
+    <input [formControl]="formControl" [value]="status.value"
+           class="form-check-input ml-1"
+           id="{{id}}_{{status.value}}"
+           name="inlineRadioOptions"
+           type="radio">
+    <label class="form-check-label" for="{{id}}_{{status.value}}">
+      <span class="badge badge-pill badge-{{status.clazz}}">{{status.description}}</span>
+    </label>
+  </div>
+</div>

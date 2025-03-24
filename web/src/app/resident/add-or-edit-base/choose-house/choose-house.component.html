@@ -1,0 +1,131 @@
+<form (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup">
+  <div class="row container-sm">
+    <div class="col-11">
+      <div *ngIf="formGroup.get(formKeys.houseId).invalid" class="row">
+        <div class="col-10 offset-2 alert alert-success text-center" role="alert">
+          请先选择居民的居住地点
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label text-right">小区(片区)<code>*</code></label>
+        <div class="col-sm-10">
+          <app-village-select [formControlName]="formKeys.villageId"></app-village-select>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label text-right">楼栋(排)<code>*</code></label>
+        <div class="col-sm-10">
+          <app-building-select [formControlName]="formKeys.buildingId"
+                               [villageId]="formGroup.get(formKeys.villageId).value"></app-building-select>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label text-right">门牌号<code>*</code></label>
+        <div class="col-sm-10">
+          <app-house-select [buildingId]="formGroup.get(formKeys.buildingId).value"
+                            [formControlName]="formKeys.houseId"></app-house-select>
+          <small *ngIf="formGroup.get(formKeys.houseId).invalid" class="text-danger">您必须选择一个门牌号</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="house.id">
+        <div class="row">
+          <div class="col-12 text-right">
+            <a class="btn btn-primary" routerLink="./house/{{house.id}}"><i class="fa fa-plus"></i>添加居民</a>
+          </div>
+        </div>
+        <table class="table table-striped mt-2">
+          <thead>
+          <tr class="table-primary">
+            <th>序号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>身份证号</th>
+            <th>电话</th>
+            <th>民族</th>
+            <th>宗教</th>
+            <th>文化程度</th>
+            <th>政治面貌</th>
+            <th>工作单位</th>
+            <th>与户主间关系</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let resident of house.residents; index as i">
+            <td>{{i + 1}}</td>
+            <td>{{resident.name}}
+              <svg aria-hidden="true" class="icon">
+                <use xlink:href="#icon-wanggeyuan"></use>
+              </svg>
+            </td>
+            <td [innerHTML]="resident.encodedIdNumber | idSex | sex"></td>
+            <td>{{resident.encodedIdNumber | idAge}}</td>
+            <td>
+              <app-id-number-show [resident]="resident"></app-id-number-show>
+            </td>
+            <td>
+              <app-phone-show [resident]="resident"></app-phone-show>
+            </td>
+            <td>{{resident.nationality | nationality}}</td>
+            <td>{{resident.religiousBelief?.name}}</td>
+            <td [innerHTML]="resident.education | education"></td>
+            <td [innerHTML]="resident.politicalClimate | politicalClimate"></td>
+            <td>{{resident.workPlace}}</td>
+            <td>{{resident.id | relationship: house.owner?.id | async}}</td>
+            <td>
+              <a routerLink="edit/{{house.id}}/resident/{{resident.id}}"> <i class="fas fa-pen text-primary"></i></a>
+              <span (click)="onRemove(resident.id, i)"><i class="fas fa-trash-alt text-danger"></i></span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <hr>
+        <table [formGroupName]="formKeys.house.value" class="table table-bordered table-striped mt-2">
+          <tbody>
+          <tr>
+            <td class="text-right">房屋性质<code>*</code></td>
+            <td>
+              <app-house-own-type-radio [formControlName]="formKeys.house.type"
+                                        [showSelectAll]="false"></app-house-own-type-radio>
+            </td>
+            <td class="text-right">房屋面积(m²)</td>
+            <td>
+              <input [formControlName]="formKeys.house.area" class="form-control" type="number">
+            </td>
+          </tr>
+          <tr>
+            <td class="text-right">享有保障性住房<code>*</code></td>
+            <td>
+              <app-true-or-false [formControlName]="formKeys.house.lowIncoming"></app-true-or-false>
+            </td>
+            <td class="text-right">享受减免房屋补贴<code>*</code></td>
+            <td>
+              <app-true-or-false [formControlName]="formKeys.house.relief"></app-true-or-false>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-right">入住时间</td>
+            <td>
+              <yz-date [formControlName]="formKeys.house.checkInTime"></yz-date>
+            </td>
+            <td class="text-right">备注</td>
+            <td>
+              <input [formControlName]="formKeys.house.remarks" class="form-control" type="text">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-12 text-center">
+            <button class="btn btn-outline-primary" [disabled]="formGroup.invalid" type="submit"><i class="fa fa-save"></i>更新房屋信息</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

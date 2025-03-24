@@ -1,0 +1,31 @@
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>职务</th>
+    <th>姓名</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let partBuilding of partBuildings; index as i">
+    <td>{{ i + 1 }}</td>
+    <td>{{partBuilding.duty.name}}</td>
+    <td>
+      {{partBuilding.personName}}
+    </td>
+    <td>
+      <a *ngIf="partBuilding.id" routerLink="edit/{{partBuilding.id}}" class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-cog"></i>设置
+      </a>
+      <a *ngIf="!partBuilding.id" routerLink="add/{{partBuilding.duty.id}}" class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-cog"></i>设置
+      </a>
+      <span class="btn btn-outline-danger btn-sm" *ngIf="partBuilding.id" (click)="onRemove(partBuilding)">
+        <i class="fas fa-trash-alt"></i>
+        移除
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>

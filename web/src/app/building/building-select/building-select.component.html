@@ -1,0 +1,6 @@
+<select [formControl]="buildingSelected" class="form-control">
+  <option [ngValue]="null">请选择</option>
+  <option *ngFor="let building of buildings" [ngValue]="building.id">
+    {{building.name}}
+  </option>
+</select>
